@@ -1,0 +1,2104 @@
+openapi: 3.0.3
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /categoryTemplates:
+    get:
+      summary: List all categoryTemplates
+      operationId: listCategoryTemplates
+      tags:
+        - categoryTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of categoryTemplates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/CategoryTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a categoryTemplate
+      operationId: createCategoryTemplates
+      tags:
+        - categoryTemplates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /categoryTemplates/{categoryTemplateId}:
+    get:
+      summary: Info for a specific categoryTemplate
+      operationId: showCategoryTemplateById
+      tags:
+        - categoryTemplates
+      parameters:
+        - name: categoryTemplateId
+          in: path
+          required: true
+          description: The id of the categoryTemplate to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/CategoryTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentCollaboratorStates:
+    get:
+      summary: List all paimentCollaboratorStates
+      operationId: listPaimentCollaboratorStates
+      tags:
+        - paimentCollaboratorStates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of paimentCollaboratorStates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/PaimentCollaboratorStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a paimentCollaboratorState
+      operationId: createPaimentCollaboratorStates
+      tags:
+        - paimentCollaboratorStates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentCollaboratorStates/{paimentCollaboratorStateId}:
+    get:
+      summary: Info for a specific paimentCollaboratorState
+      operationId: showPaimentCollaboratorStateById
+      tags:
+        - paimentCollaboratorStates
+      parameters:
+        - name: paimentCollaboratorStateId
+          in: path
+          required: true
+          description: The id of the paimentCollaboratorState to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/PaimentCollaboratorStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaborators:
+    get:
+      summary: List all inscriptionCollaborators
+      operationId: listInscriptionCollaborators
+      tags:
+        - inscriptionCollaborators
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of inscriptionCollaborators
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/InscriptionCollaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a inscriptionCollaborator
+      operationId: createInscriptionCollaborators
+      tags:
+        - inscriptionCollaborators
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaborators/{inscriptionCollaboratorId}:
+    get:
+      summary: Info for a specific inscriptionCollaborator
+      operationId: showInscriptionCollaboratorById
+      tags:
+        - inscriptionCollaborators
+      parameters:
+        - name: inscriptionCollaboratorId
+          in: path
+          required: true
+          description: The id of the inscriptionCollaborator to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/InscriptionCollaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projectStates:
+    get:
+      summary: List all projectStates
+      operationId: listProjectStates
+      tags:
+        - projectStates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of projectStates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/ProjectStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a projectState
+      operationId: createProjectStates
+      tags:
+        - projectStates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projectStates/{projectStateId}:
+    get:
+      summary: Info for a specific projectState
+      operationId: showProjectStateById
+      tags:
+        - projectStates
+      parameters:
+        - name: projectStateId
+          in: path
+          required: true
+          description: The id of the projectState to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/ProjectStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /influencers:
+    get:
+      summary: List all influencers
+      operationId: listInfluencers
+      tags:
+        - influencers
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of influencers
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Influencers'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a influencer
+      operationId: createInfluencers
+      tags:
+        - influencers
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /influencers/{influencerId}:
+    get:
+      summary: Info for a specific influencer
+      operationId: showInfluencerById
+      tags:
+        - influencers
+      parameters:
+        - name: influencerId
+          in: path
+          required: true
+          description: The id of the influencer to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Influencers'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /coupons:
+    get:
+      summary: List all coupons
+      operationId: listCoupons
+      tags:
+        - coupons
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of coupons
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Coupons'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a coupon
+      operationId: createCoupons
+      tags:
+        - coupons
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /coupons/{couponId}:
+    get:
+      summary: Info for a specific coupon
+      operationId: showCouponById
+      tags:
+        - coupons
+      parameters:
+        - name: couponId
+          in: path
+          required: true
+          description: The id of the coupon to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Coupons'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /typeTemplates:
+    get:
+      summary: List all typeTemplates
+      operationId: listTypeTemplates
+      tags:
+        - typeTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of typeTemplates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/TypeTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a typeTemplate
+      operationId: createTypeTemplates
+      tags:
+        - typeTemplates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /typeTemplates/{typeTemplateId}:
+    get:
+      summary: Info for a specific typeTemplate
+      operationId: showTypeTemplateById
+      tags:
+        - typeTemplates
+      parameters:
+        - name: typeTemplateId
+          in: path
+          required: true
+          description: The id of the typeTemplate to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/TypeTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionMembreStates:
+    get:
+      summary: List all inscriptionMembreStates
+      operationId: listInscriptionMembreStates
+      tags:
+        - inscriptionMembreStates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of inscriptionMembreStates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/InscriptionMembreStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a inscriptionMembreState
+      operationId: createInscriptionMembreStates
+      tags:
+        - inscriptionMembreStates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionMembreStates/{inscriptionMembreStateId}:
+    get:
+      summary: Info for a specific inscriptionMembreState
+      operationId: showInscriptionMembreStateById
+      tags:
+        - inscriptionMembreStates
+      parameters:
+        - name: inscriptionMembreStateId
+          in: path
+          required: true
+          description: The id of the inscriptionMembreState to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/InscriptionMembreStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentInfluencers:
+    get:
+      summary: List all paimentInfluencers
+      operationId: listPaimentInfluencers
+      tags:
+        - paimentInfluencers
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of paimentInfluencers
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/PaimentInfluencers'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a paimentInfluencer
+      operationId: createPaimentInfluencers
+      tags:
+        - paimentInfluencers
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentInfluencers/{paimentInfluencerId}:
+    get:
+      summary: Info for a specific paimentInfluencer
+      operationId: showPaimentInfluencerById
+      tags:
+        - paimentInfluencers
+      parameters:
+        - name: paimentInfluencerId
+          in: path
+          required: true
+          description: The id of the paimentInfluencer to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/PaimentInfluencers'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaboratorStates:
+    get:
+      summary: List all inscriptionCollaboratorStates
+      operationId: listInscriptionCollaboratorStates
+      tags:
+        - inscriptionCollaboratorStates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of inscriptionCollaboratorStates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/InscriptionCollaboratorStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a inscriptionCollaboratorState
+      operationId: createInscriptionCollaboratorStates
+      tags:
+        - inscriptionCollaboratorStates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaboratorStates/{inscriptionCollaboratorStateId}:
+    get:
+      summary: Info for a specific inscriptionCollaboratorState
+      operationId: showInscriptionCollaboratorStateById
+      tags:
+        - inscriptionCollaboratorStates
+      parameters:
+        - name: inscriptionCollaboratorStateId
+          in: path
+          required: true
+          description: The id of the inscriptionCollaboratorState to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/InscriptionCollaboratorStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /domainTemplates:
+    get:
+      summary: List all domainTemplates
+      operationId: listDomainTemplates
+      tags:
+        - domainTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of domainTemplates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/DomainTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a domainTemplate
+      operationId: createDomainTemplates
+      tags:
+        - domainTemplates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /domainTemplates/{domainTemplateId}:
+    get:
+      summary: Info for a specific domainTemplate
+      operationId: showDomainTemplateById
+      tags:
+        - domainTemplates
+      parameters:
+        - name: domainTemplateId
+          in: path
+          required: true
+          description: The id of the domainTemplate to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/DomainTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /packagings:
+    get:
+      summary: List all packagings
+      operationId: listPackagings
+      tags:
+        - packagings
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of packagings
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Packagings'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a packaging
+      operationId: createPackagings
+      tags:
+        - packagings
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /packagings/{packagingId}:
+    get:
+      summary: Info for a specific packaging
+      operationId: showPackagingById
+      tags:
+        - packagings
+      parameters:
+        - name: packagingId
+          in: path
+          required: true
+          description: The id of the packaging to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Packagings'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /members:
+    get:
+      summary: List all members
+      operationId: listMembers
+      tags:
+        - members
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of members
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Members'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a member
+      operationId: createMembers
+      tags:
+        - members
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /members/{memberId}:
+    get:
+      summary: Info for a specific member
+      operationId: showMemberById
+      tags:
+        - members
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          description: The id of the member to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Members'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionMembres:
+    get:
+      summary: List all inscriptionMembres
+      operationId: listInscriptionMembres
+      tags:
+        - inscriptionMembres
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of inscriptionMembres
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/InscriptionMembres'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a inscriptionMembre
+      operationId: createInscriptionMembres
+      tags:
+        - inscriptionMembres
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionMembres/{inscriptionMembreId}:
+    get:
+      summary: Info for a specific inscriptionMembre
+      operationId: showInscriptionMembreById
+      tags:
+        - inscriptionMembres
+      parameters:
+        - name: inscriptionMembreId
+          in: path
+          required: true
+          description: The id of the inscriptionMembre to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/InscriptionMembres'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projectTemplates:
+    get:
+      summary: List all projectTemplates
+      operationId: listProjectTemplates
+      tags:
+        - projectTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of projectTemplates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/ProjectTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a projectTemplate
+      operationId: createProjectTemplates
+      tags:
+        - projectTemplates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projectTemplates/{projectTemplateId}:
+    get:
+      summary: Info for a specific projectTemplate
+      operationId: showProjectTemplateById
+      tags:
+        - projectTemplates
+      parameters:
+        - name: projectTemplateId
+          in: path
+          required: true
+          description: The id of the projectTemplate to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/ProjectTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaboratorTypes:
+    get:
+      summary: List all inscriptionCollaboratorTypes
+      operationId: listInscriptionCollaboratorTypes
+      tags:
+        - inscriptionCollaboratorTypes
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of inscriptionCollaboratorTypes
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/InscriptionCollaboratorTypes'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a inscriptionCollaboratorType
+      operationId: createInscriptionCollaboratorTypes
+      tags:
+        - inscriptionCollaboratorTypes
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /inscriptionCollaboratorTypes/{inscriptionCollaboratorTypeId}:
+    get:
+      summary: Info for a specific inscriptionCollaboratorType
+      operationId: showInscriptionCollaboratorTypeById
+      tags:
+        - inscriptionCollaboratorTypes
+      parameters:
+        - name: inscriptionCollaboratorTypeId
+          in: path
+          required: true
+          description: The id of the inscriptionCollaboratorType to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/InscriptionCollaboratorTypes'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /categoryPackagings:
+    get:
+      summary: List all categoryPackagings
+      operationId: listCategoryPackagings
+      tags:
+        - categoryPackagings
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of categoryPackagings
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/CategoryPackagings'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a categoryPackaging
+      operationId: createCategoryPackagings
+      tags:
+        - categoryPackagings
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /categoryPackagings/{categoryPackagingId}:
+    get:
+      summary: Info for a specific categoryPackaging
+      operationId: showCategoryPackagingById
+      tags:
+        - categoryPackagings
+      parameters:
+        - name: categoryPackagingId
+          in: path
+          required: true
+          description: The id of the categoryPackaging to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/CategoryPackagings'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /levelTemplates:
+    get:
+      summary: List all levelTemplates
+      operationId: listLevelTemplates
+      tags:
+        - levelTemplates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of levelTemplates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/LevelTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a levelTemplate
+      operationId: createLevelTemplates
+      tags:
+        - levelTemplates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /levelTemplates/{levelTemplateId}:
+    get:
+      summary: Info for a specific levelTemplate
+      operationId: showLevelTemplateById
+      tags:
+        - levelTemplates
+      parameters:
+        - name: levelTemplateId
+          in: path
+          required: true
+          description: The id of the levelTemplate to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/LevelTemplates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /technologys:
+    get:
+      summary: List all technologys
+      operationId: listTechnologys
+      tags:
+        - technologys
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of technologys
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Technologys'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a technology
+      operationId: createTechnologys
+      tags:
+        - technologys
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /technologys/{technologyId}:
+    get:
+      summary: Info for a specific technology
+      operationId: showTechnologyById
+      tags:
+        - technologys
+      parameters:
+        - name: technologyId
+          in: path
+          required: true
+          description: The id of the technology to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Technologys'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /templates:
+    get:
+      summary: List all templates
+      operationId: listTemplates
+      tags:
+        - templates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of templates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Templates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a template
+      operationId: createTemplates
+      tags:
+        - templates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /templates/{templateId}:
+    get:
+      summary: Info for a specific template
+      operationId: showTemplateById
+      tags:
+        - templates
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          description: The id of the template to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Templates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentInfluencerStates:
+    get:
+      summary: List all paimentInfluencerStates
+      operationId: listPaimentInfluencerStates
+      tags:
+        - paimentInfluencerStates
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of paimentInfluencerStates
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/PaimentInfluencerStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a paimentInfluencerState
+      operationId: createPaimentInfluencerStates
+      tags:
+        - paimentInfluencerStates
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentInfluencerStates/{paimentInfluencerStateId}:
+    get:
+      summary: Info for a specific paimentInfluencerState
+      operationId: showPaimentInfluencerStateById
+      tags:
+        - paimentInfluencerStates
+      parameters:
+        - name: paimentInfluencerStateId
+          in: path
+          required: true
+          description: The id of the paimentInfluencerState to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/PaimentInfluencerStates'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentCollaborators:
+    get:
+      summary: List all paimentCollaborators
+      operationId: listPaimentCollaborators
+      tags:
+        - paimentCollaborators
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of paimentCollaborators
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/PaimentCollaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a paimentCollaborator
+      operationId: createPaimentCollaborators
+      tags:
+        - paimentCollaborators
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /paimentCollaborators/{paimentCollaboratorId}:
+    get:
+      summary: Info for a specific paimentCollaborator
+      operationId: showPaimentCollaboratorById
+      tags:
+        - paimentCollaborators
+      parameters:
+        - name: paimentCollaboratorId
+          in: path
+          required: true
+          description: The id of the paimentCollaborator to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/PaimentCollaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /collaborators:
+    get:
+      summary: List all collaborators
+      operationId: listCollaborators
+      tags:
+        - collaborators
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of collaborators
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Collaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a collaborator
+      operationId: createCollaborators
+      tags:
+        - collaborators
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /collaborators/{collaboratorId}:
+    get:
+      summary: Info for a specific collaborator
+      operationId: showCollaboratorById
+      tags:
+        - collaborators
+      parameters:
+        - name: collaboratorId
+          in: path
+          required: true
+          description: The id of the collaborator to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Collaborators'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /couponDetails:
+    get:
+      summary: List all couponDetails
+      operationId: listCouponDetails
+      tags:
+        - couponDetails
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of couponDetails
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/CouponDetails'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a couponDetail
+      operationId: createCouponDetails
+      tags:
+        - couponDetails
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /couponDetails/{couponDetailId}:
+    get:
+      summary: Info for a specific couponDetail
+      operationId: showCouponDetailById
+      tags:
+        - couponDetails
+      parameters:
+        - name: couponDetailId
+          in: path
+          required: true
+          description: The id of the couponDetail to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/CouponDetails'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projects:
+    get:
+      summary: List all projects
+      operationId: listProjects
+      tags:
+        - projects
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: A paged array of projects
+          headers:
+            x-next:
+              type: string
+              description: A link to the next page of responses
+          schema:
+            $ref: '#/definitions/Projects'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a project
+      operationId: createProjects
+      tags:
+        - projects
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /projects/{projectId}:
+    get:
+      summary: Info for a specific project
+      operationId: showProjectById
+      tags:
+        - projects
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the project to retrieve
+          type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          schema:
+            $ref: '#/definitions/Projects'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+
+
+definitions:
+  CategoryTemplate:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  CategoryTemplates:
+    type: array
+    items:
+      $ref: '#/definitions/CategoryTemplate'
+  PaimentCollaboratorState:
+    type: "object"
+    required:
+      - id
+      - code
+      - libelle
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      libelle:
+        type: string
+  PaimentCollaboratorStates:
+    type: array
+    items:
+      $ref: '#/definitions/PaimentCollaboratorState'
+  InscriptionCollaborator:
+    type: "object"
+    required:
+      - id
+      - startDate
+      - endDate
+      - renewDate
+      - consumedEntity
+      - consumedProjet
+      - consumedAttribut
+      - consumedIndicator
+    properties:
+      id:
+        type: int
+      startDate:
+        type: date
+      endDate:
+        type: date
+      renewDate:
+        type: date
+      consumedEntity:
+        type: number
+      consumedProjet:
+        type: number
+      consumedAttribut:
+        type: number
+      consumedIndicator:
+        type: number
+  InscriptionCollaborators:
+    type: array
+    items:
+      $ref: '#/definitions/InscriptionCollaborator'
+  ProjectState:
+    type: "object"
+    required:
+      - id
+      - code
+      - libelle
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      libelle:
+        type: string
+  ProjectStates:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectState'
+  Influencer:
+    type: "object"
+    required:
+      - id
+      - nickName
+      - rib
+      - credentialsNonExpired
+      - enabled
+      - accountNonExpired
+      - accountNonLocked
+      - passwordChanged
+      - username
+      - password
+    properties:
+      id:
+        type: int
+      nickName:
+        type: string
+      rib:
+        type: string
+      credentialsNonExpired:
+        type: boolean
+      enabled:
+        type: boolean
+      accountNonExpired:
+        type: boolean
+      accountNonLocked:
+        type: boolean
+      passwordChanged:
+        type: boolean
+      username:
+        type: string
+      password:
+        type: string
+  Influencers:
+    type: array
+    items:
+      $ref: '#/definitions/Influencer'
+  Coupon:
+    type: "object"
+    required:
+      - id
+      - code
+      - dateStart
+      - dateEnd
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      dateStart:
+        type: date
+      dateEnd:
+        type: date
+      name:
+        type: string
+  Coupons:
+    type: array
+    items:
+      $ref: '#/definitions/Coupon'
+  TypeTemplate:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  TypeTemplates:
+    type: array
+    items:
+      $ref: '#/definitions/TypeTemplate'
+  InscriptionMembreState:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  InscriptionMembreStates:
+    type: array
+    items:
+      $ref: '#/definitions/InscriptionMembreState'
+  PaimentInfluencer:
+    type: "object"
+    required:
+      - id
+      - name
+      - description
+      - code
+      - total
+      - nbrUtilisation
+      - datePaiement
+    properties:
+      id:
+        type: int
+      name:
+        type: string
+      description:
+        type: string
+      code:
+        type: string
+      total:
+        type: number
+      nbrUtilisation:
+        type: number
+      datePaiement:
+        type: date
+  PaimentInfluencers:
+    type: array
+    items:
+      $ref: '#/definitions/PaimentInfluencer'
+  InscriptionCollaboratorState:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  InscriptionCollaboratorStates:
+    type: array
+    items:
+      $ref: '#/definitions/InscriptionCollaboratorState'
+  DomainTemplate:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  DomainTemplates:
+    type: array
+    items:
+      $ref: '#/definitions/DomainTemplate'
+  Packaging:
+    type: "object"
+    required:
+      - id
+      - name
+      - code
+      - description
+      - dateStart
+      - dateEnd
+      - price
+      - maxEntity
+      - maxProjet
+      - maxAttribut
+      - maxIndicator
+    properties:
+      id:
+        type: int
+      name:
+        type: string
+      code:
+        type: string
+      description:
+        type: string
+      dateStart:
+        type: date
+      dateEnd:
+        type: date
+      price:
+        type: number
+      maxEntity:
+        type: number
+      maxProjet:
+        type: number
+      maxAttribut:
+        type: number
+      maxIndicator:
+        type: number
+  Packagings:
+    type: array
+    items:
+      $ref: '#/definitions/Packaging'
+  Member:
+    type: "object"
+    required:
+      - id
+      - description
+      - credentialsNonExpired
+      - enabled
+      - accountNonExpired
+      - accountNonLocked
+      - passwordChanged
+      - username
+      - password
+    properties:
+      id:
+        type: int
+      description:
+        type: string
+      credentialsNonExpired:
+        type: boolean
+      enabled:
+        type: boolean
+      accountNonExpired:
+        type: boolean
+      accountNonLocked:
+        type: boolean
+      passwordChanged:
+        type: boolean
+      username:
+        type: string
+      password:
+        type: string
+  Members:
+    type: array
+    items:
+      $ref: '#/definitions/Member'
+  InscriptionMembre:
+    type: "object"
+    required:
+      - id
+      - inscriptionDate
+      - consumedEntity
+      - consumedProjet
+      - consumedAttribut
+      - consumedIndicator
+      - affectedEntity
+      - affectedProjet
+      - affectedAttribut
+      - affectedIndicator
+    properties:
+      id:
+        type: int
+      inscriptionDate:
+        type: date
+      consumedEntity:
+        type: number
+      consumedProjet:
+        type: number
+      consumedAttribut:
+        type: number
+      consumedIndicator:
+        type: number
+      affectedEntity:
+        type: number
+      affectedProjet:
+        type: number
+      affectedAttribut:
+        type: number
+      affectedIndicator:
+        type: number
+  InscriptionMembres:
+    type: array
+    items:
+      $ref: '#/definitions/InscriptionMembre'
+  ProjectTemplate:
+    type: "object"
+    required:
+      - id
+    properties:
+      id:
+        type: int
+  ProjectTemplates:
+    type: array
+    items:
+      $ref: '#/definitions/ProjectTemplate'
+  InscriptionCollaboratorType:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  InscriptionCollaboratorTypes:
+    type: array
+    items:
+      $ref: '#/definitions/InscriptionCollaboratorType'
+  CategoryPackaging:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  CategoryPackagings:
+    type: array
+    items:
+      $ref: '#/definitions/CategoryPackaging'
+  LevelTemplate:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+  LevelTemplates:
+    type: array
+    items:
+      $ref: '#/definitions/LevelTemplate'
+  Technology:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+      - logo
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+      logo:
+        type: string
+  Technologys:
+    type: array
+    items:
+      $ref: '#/definitions/Technology'
+  Template:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+      - description
+      - addingDate
+      - lastUpdateDate
+      - templateTags
+      - price
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      addingDate:
+        type: date
+      lastUpdateDate:
+        type: date
+      templateTags:
+        type: string
+      price:
+        type: number
+  Templates:
+    type: array
+    items:
+      $ref: '#/definitions/Template'
+  PaimentInfluencerState:
+    type: "object"
+    required:
+      - id
+      - code
+      - libelle
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      libelle:
+        type: string
+  PaimentInfluencerStates:
+    type: array
+    items:
+      $ref: '#/definitions/PaimentInfluencerState'
+  PaimentCollaborator:
+    type: "object"
+    required:
+      - id
+      - name
+      - description
+      - code
+      - amountToPaid
+      - total
+      - discount
+      - remaining
+      - paiementDate
+    properties:
+      id:
+        type: int
+      name:
+        type: string
+      description:
+        type: string
+      code:
+        type: string
+      amountToPaid:
+        type: number
+      total:
+        type: number
+      discount:
+        type: number
+      remaining:
+        type: number
+      paiementDate:
+        type: date
+  PaimentCollaborators:
+    type: array
+    items:
+      $ref: '#/definitions/PaimentCollaborator'
+  Collaborator:
+    type: "object"
+    required:
+      - id
+      - description
+      - rib
+      - credentialsNonExpired
+      - enabled
+      - accountNonExpired
+      - accountNonLocked
+      - passwordChanged
+      - username
+      - password
+    properties:
+      id:
+        type: int
+      description:
+        type: string
+      rib:
+        type: string
+      credentialsNonExpired:
+        type: boolean
+      enabled:
+        type: boolean
+      accountNonExpired:
+        type: boolean
+      accountNonLocked:
+        type: boolean
+      passwordChanged:
+        type: boolean
+      username:
+        type: string
+      password:
+        type: string
+  Collaborators:
+    type: array
+    items:
+      $ref: '#/definitions/Collaborator'
+  CouponDetail:
+    type: "object"
+    required:
+      - id
+      - discount
+      - amountGivenInfluencer
+      - usingNumber
+      - maxUsingNumber
+    properties:
+      id:
+        type: int
+      discount:
+        type: number
+      amountGivenInfluencer:
+        type: number
+      usingNumber:
+        type: number
+      maxUsingNumber:
+        type: number
+  CouponDetails:
+    type: array
+    items:
+      $ref: '#/definitions/CouponDetail'
+  Project:
+    type: "object"
+    required:
+      - id
+      - code
+      - name
+      - generatedDate
+      - yaml
+    properties:
+      id:
+        type: int
+      code:
+        type: string
+      name:
+        type: string
+      generatedDate:
+        type: date
+      yaml:
+        type: string
+  Projects:
+    type: array
+    items:
+      $ref: '#/definitions/Project'
+
+  Error:
+    type: "object"
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string

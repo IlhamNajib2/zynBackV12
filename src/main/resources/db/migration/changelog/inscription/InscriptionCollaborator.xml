@@ -1,0 +1,93 @@
+<!-- db/changelog-1.1-container.xml -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Create Container Table -->
+    <changeSet id="1" author="your-name">
+    <createTable tableName="inscription_collaborator">
+      <column name="id" type="BIGINT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+        <column name="start_date" type="TIMESTAMP"/>
+        <column name="end_date" type="TIMESTAMP"/>
+        <column name="renew_date" type="TIMESTAMP"/>
+        <column name="consumed_entity" type="NUMERIC"/>
+        <column name="consumed_projet" type="NUMERIC"/>
+        <column name="consumed_attribut" type="NUMERIC"/>
+        <column name="consumed_indicator" type="NUMERIC"/>
+
+        <column name="packaging_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="collaborator_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="inscription_collaborator_state_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="inscription_collaborator_type_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+  </changeSet>
+
+    <!-- Add foreign key constraint -->
+  <changeSet id="2" author="your-name">
+      <addForeignKeyConstraint
+              baseTableName="inscription_collaborator"
+              baseColumnNames="packaging_id"
+              referencedTableName="packaging"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_collaborator_packaging"/>
+      <addForeignKeyConstraint
+              baseTableName="inscription_collaborator"
+              baseColumnNames="collaborator_id"
+              referencedTableName="collaborator"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_collaborator_collaborator"/>
+      <addForeignKeyConstraint
+              baseTableName="inscription_collaborator"
+              baseColumnNames="inscription_collaborator_state_id"
+              referencedTableName="inscription_collaborator_state"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_collaborator_inscription_collaborator_state"/>
+      <addForeignKeyConstraint
+              baseTableName="inscription_collaborator"
+              baseColumnNames="inscription_collaborator_type_id"
+              referencedTableName="inscription_collaborator_type"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_collaborator_inscription_collaborator_type"/>
+
+  </changeSet>
+
+    <!-- Create Sequence for ContainerType -->
+  <changeSet id="3" author="your-name">
+    <createSequence sequenceName="inscription_collaborator_seq" startValue="1" incrementBy="1"/>
+  </changeSet>
+
+  <!-- Load Data from CSV -->
+  <changeSet id="4" author="your-name">
+    <loadData
+            file="classpath:/db/migration/data/inscription/InscriptionCollaborator.csv"
+            tableName="inscription_collaborator">
+      <column name="id" type="NUMERIC"/>
+          <column name="start_date" type="TIMESTAMP"/>
+          <column name="end_date" type="TIMESTAMP"/>
+          <column name="renew_date" type="TIMESTAMP"/>
+          <column name="consumed_entity" type="NUMERIC"/>
+          <column name="consumed_projet" type="NUMERIC"/>
+          <column name="consumed_attribut" type="NUMERIC"/>
+          <column name="consumed_indicator" type="NUMERIC"/>
+        <column name="packaging" type="BIGINT"/>
+        <column name="collaborator" type="BIGINT"/>
+        <column name="inscription_collaborator_state" type="BIGINT"/>
+        <column name="inscription_collaborator_type" type="BIGINT"/>
+    </loadData>
+  </changeSet>
+
+
+</databaseChangeLog>

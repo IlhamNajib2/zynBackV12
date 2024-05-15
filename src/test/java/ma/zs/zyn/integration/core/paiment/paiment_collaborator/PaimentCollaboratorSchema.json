@@ -1,0 +1,21 @@
+{
+    "name": "#string",
+    "description": "#string",
+    "code": "#string",
+    "couponDetail": {"id": "#number"},
+    "amountToPaid": "#number",
+    "total": "#number",
+    "discount": "#number",
+    "remaining": "#number",
+    "inscriptionCollaborator": {"id": "#number"},
+    "paimentCollaboratorState": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

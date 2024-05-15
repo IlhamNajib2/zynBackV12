@@ -1,0 +1,20 @@
+{
+    "name": "#string",
+    "code": "#string",
+    "description": "#string",
+    "price": "#number",
+    "maxEntity": "#number",
+    "maxProjet": "#number",
+    "maxAttribut": "#number",
+    "maxIndicator": "#number",
+    "categoryPackaging": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

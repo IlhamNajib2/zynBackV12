@@ -1,0 +1,22 @@
+{
+    "code": "code-1",
+    "name": "name-1",
+    "description": "description-1",
+    "categoryTemplate": {"id": "1"},
+    "typeTemplate": {"id": "1"},
+    "levelTemplate": {"id": "1"},
+    "templateTags": "templateTags-1",
+    "domainTemplate": {"id": "1"},
+    "price": "10",
+    "member": {"id": "1"},
+    "technology": {"id": "1"}
+
+}
+
+
+
+
+
+
+
+

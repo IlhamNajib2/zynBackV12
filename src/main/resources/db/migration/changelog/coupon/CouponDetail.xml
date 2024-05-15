@@ -1,0 +1,67 @@
+<!-- db/changelog-1.1-container.xml -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Create Container Table -->
+    <changeSet id="1" author="your-name">
+    <createTable tableName="coupon_detail">
+      <column name="id" type="BIGINT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+        <column name="discount" type="NUMERIC"/>
+        <column name="amount_given_influencer" type="NUMERIC"/>
+        <column name="using_number" type="NUMERIC"/>
+        <column name="max_using_number" type="NUMERIC"/>
+
+        <column name="packaging_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="coupon_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+  </changeSet>
+
+    <!-- Add foreign key constraint -->
+  <changeSet id="2" author="your-name">
+      <addForeignKeyConstraint
+              baseTableName="coupon_detail"
+              baseColumnNames="packaging_id"
+              referencedTableName="packaging"
+              referencedColumnNames="id"
+              constraintName="fk_coupon_detail_packaging"/>
+      <addForeignKeyConstraint
+              baseTableName="coupon_detail"
+              baseColumnNames="coupon_id"
+              referencedTableName="coupon"
+              referencedColumnNames="id"
+              constraintName="fk_coupon_detail_coupon"/>
+
+  </changeSet>
+
+    <!-- Create Sequence for ContainerType -->
+  <changeSet id="3" author="your-name">
+    <createSequence sequenceName="coupon_detail_seq" startValue="1" incrementBy="1"/>
+  </changeSet>
+
+  <!-- Load Data from CSV -->
+  <changeSet id="4" author="your-name">
+    <loadData
+            file="classpath:/db/migration/data/coupon/CouponDetail.csv"
+            tableName="coupon_detail">
+      <column name="id" type="NUMERIC"/>
+          <column name="discount" type="NUMERIC"/>
+          <column name="amount_given_influencer" type="NUMERIC"/>
+          <column name="using_number" type="NUMERIC"/>
+          <column name="max_using_number" type="NUMERIC"/>
+        <column name="packaging" type="BIGINT"/>
+        <column name="coupon" type="BIGINT"/>
+    </loadData>
+  </changeSet>
+
+
+</databaseChangeLog>

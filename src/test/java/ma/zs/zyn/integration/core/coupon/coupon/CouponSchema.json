@@ -1,0 +1,37 @@
+{
+    "code": "#string",
+    "name": "#string",
+    "influencer": {"id": "#number"},
+
+    "couponDetails": [
+      {
+        "packaging":{"id": "#number"},}
+        "discount":"#number",}
+        "amountGivenInfluencer":"#number",}
+        "usingNumber":"#number",}
+        "maxUsingNumber":"#number"}
+      },
+      {
+        "packaging":{"id": "#number"},}
+        "discount":"#number",}
+        "amountGivenInfluencer":"#number",}
+        "usingNumber":"#number",}
+        "maxUsingNumber":"#number"}
+      },
+      {
+        "packaging":{"id": "#number"},}
+        "discount":"#number",}
+        "amountGivenInfluencer":"#number",}
+        "usingNumber":"#number",}
+        "maxUsingNumber":"#number"}
+      }
+    ]
+}
+
+
+
+
+
+
+
+

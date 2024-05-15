@@ -1,0 +1,22 @@
+{
+    "member": {"id": "#number"},
+    "inscriptionMembreState": {"id": "#number"},
+    "inscriptionCollaborator": {"id": "#number"},
+    "consumedEntity": "#number",
+    "consumedProjet": "#number",
+    "consumedAttribut": "#number",
+    "consumedIndicator": "#number",
+    "affectedEntity": "#number",
+    "affectedProjet": "#number",
+    "affectedAttribut": "#number",
+    "affectedIndicator": "#number"
+
+}
+
+
+
+
+
+
+
+

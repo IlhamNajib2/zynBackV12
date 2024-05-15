@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+            <include file="classpath:db/migration/changelog/template/CategoryTemplate.xml"/>
+        <include file="classpath:db/migration/changelog/project/PaimentCollaboratorState.xml"/>
+        <include file="classpath:db/migration/changelog/inscription/InscriptionCollaborator.xml"/>
+        <include file="classpath:db/migration/changelog/project/ProjectState.xml"/>
+        <include file="classpath:db/migration/changelog/coupon/Influencer.xml"/>
+        <include file="classpath:db/migration/changelog/coupon/Coupon.xml"/>
+        <include file="classpath:db/migration/changelog/template/TypeTemplate.xml"/>
+        <include file="classpath:db/migration/changelog/inscription/InscriptionMembreState.xml"/>
+        <include file="classpath:db/migration/changelog/paiment/PaimentInfluencer.xml"/>
+        <include file="classpath:db/migration/changelog/inscription/InscriptionCollaboratorState.xml"/>
+        <include file="classpath:db/migration/changelog/template/DomainTemplate.xml"/>
+        <include file="classpath:db/migration/changelog/packaging/Packaging.xml"/>
+        <include file="classpath:db/migration/changelog/collaborator/Member.xml"/>
+        <include file="classpath:db/migration/changelog/inscription/InscriptionMembre.xml"/>
+        <include file="classpath:db/migration/changelog/template/ProjectTemplate.xml"/>
+        <include file="classpath:db/migration/changelog/inscription/InscriptionCollaboratorType.xml"/>
+        <include file="classpath:db/migration/changelog/category/CategoryPackaging.xml"/>
+        <include file="classpath:db/migration/changelog/template/LevelTemplate.xml"/>
+        <include file="classpath:db/migration/changelog/template/Technology.xml"/>
+        <include file="classpath:db/migration/changelog/template/Template.xml"/>
+        <include file="classpath:db/migration/changelog/project/PaimentInfluencerState.xml"/>
+        <include file="classpath:db/migration/changelog/paiment/PaimentCollaborator.xml"/>
+        <include file="classpath:db/migration/changelog/collaborator/Collaborator.xml"/>
+        <include file="classpath:db/migration/changelog/coupon/CouponDetail.xml"/>
+        <include file="classpath:db/migration/changelog/project/Project.xml"/>
+
+</databaseChangeLog>

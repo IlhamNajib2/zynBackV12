@@ -1,0 +1,28 @@
+{
+    "code": "#string",
+    "name": "#string",
+    "yaml": "#string",
+    "projectState": {"id": "#number"},
+    "inscriptionMembre": {"id": "#number"},
+    "domainTemplate": {"id": "#number"},
+
+    "projectTemplates": [
+      {
+        "template":{"id": "#number"}}
+      },
+      {
+        "template":{"id": "#number"}}
+      },
+      {
+        "template":{"id": "#number"}}
+      }
+    ]
+}
+
+
+
+
+
+
+
+

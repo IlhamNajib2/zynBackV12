@@ -1,0 +1,19 @@
+{
+    "name": "#string",
+    "description": "#string",
+    "code": "#string",
+    "influencer": {"id": "#number"},
+    "coupon": {"id": "#number"},
+    "total": "#number",
+    "nbrUtilisation": "#number",
+    "paimentInfluencerState": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

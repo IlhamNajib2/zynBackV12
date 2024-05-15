@@ -1,0 +1,19 @@
+{
+    "name": "name-1",
+    "description": "description-1",
+    "code": "code-1",
+    "influencer": {"id": "1"},
+    "coupon": {"id": "1"},
+    "total": "10",
+    "nbrUtilisation": "10",
+    "paimentInfluencerState": {"id": "1"}
+
+}
+
+
+
+
+
+
+
+

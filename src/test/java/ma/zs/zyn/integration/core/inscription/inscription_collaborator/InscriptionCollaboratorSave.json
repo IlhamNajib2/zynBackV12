@@ -1,0 +1,57 @@
+{
+    "packaging": {"id": "1"},
+    "consumedEntity": "10",
+    "consumedProjet": "10",
+    "consumedAttribut": "10",
+    "consumedIndicator": "10",
+    "collaborator": {"id": "1"},
+    "inscriptionCollaboratorState": {"id": "1"},
+    "inscriptionCollaboratorType": {"id": "1"},
+
+    "inscriptionMembres": [
+        {
+            "member":{"id": "1"},
+            "inscriptionMembreState":{"id": "1"},
+            "consumedEntity":"10",
+            "consumedProjet":"10",
+            "consumedAttribut":"10",
+            "consumedIndicator":"10",
+            "affectedEntity":"10",
+            "affectedProjet":"10",
+            "affectedAttribut":"10",
+            "affectedIndicator":"10"
+        },
+        {
+            "member":{"id": "2"},
+            "inscriptionMembreState":{"id": "2"},
+            "consumedEntity":"20",
+            "consumedProjet":"20",
+            "consumedAttribut":"20",
+            "consumedIndicator":"20",
+            "affectedEntity":"20",
+            "affectedProjet":"20",
+            "affectedAttribut":"20",
+            "affectedIndicator":"20"
+        },
+        {
+            "member":{"id": "3"},
+            "inscriptionMembreState":{"id": "3"},
+            "consumedEntity":"30",
+            "consumedProjet":"30",
+            "consumedAttribut":"30",
+            "consumedIndicator":"30",
+            "affectedEntity":"30",
+            "affectedProjet":"30",
+            "affectedAttribut":"30",
+            "affectedIndicator":"30"
+        }
+    ]
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+{
+    "code": "#string",
+    "name": "#string",
+    "description": "#string",
+    "categoryTemplate": {"id": "#number"},
+    "typeTemplate": {"id": "#number"},
+    "levelTemplate": {"id": "#number"},
+    "templateTags": "#string",
+    "domainTemplate": {"id": "#number"},
+    "price": "#number",
+    "member": {"id": "#number"},
+    "technology": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

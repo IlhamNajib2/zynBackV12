@@ -1,0 +1,20 @@
+{
+    "name": "name-1",
+    "code": "code-1",
+    "description": "description-1",
+    "price": "10",
+    "maxEntity": "10",
+    "maxProjet": "10",
+    "maxAttribut": "10",
+    "maxIndicator": "10",
+    "categoryPackaging": {"id": "1"}
+
+}
+
+
+
+
+
+
+
+

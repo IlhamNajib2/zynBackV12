@@ -1,0 +1,87 @@
+<!-- db/changelog-1.1-container.xml -->
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+  <!-- Create Container Table -->
+    <changeSet id="1" author="your-name">
+    <createTable tableName="inscription_membre">
+      <column name="id" type="BIGINT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+        <column name="inscription_date" type="TIMESTAMP"/>
+        <column name="consumed_entity" type="NUMERIC"/>
+        <column name="consumed_projet" type="NUMERIC"/>
+        <column name="consumed_attribut" type="NUMERIC"/>
+        <column name="consumed_indicator" type="NUMERIC"/>
+        <column name="affected_entity" type="NUMERIC"/>
+        <column name="affected_projet" type="NUMERIC"/>
+        <column name="affected_attribut" type="NUMERIC"/>
+        <column name="affected_indicator" type="NUMERIC"/>
+
+        <column name="member_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="inscription_membre_state_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+        <column name="inscription_collaborator_id" type="BIGINT">
+          <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+  </changeSet>
+
+    <!-- Add foreign key constraint -->
+  <changeSet id="2" author="your-name">
+      <addForeignKeyConstraint
+              baseTableName="inscription_membre"
+              baseColumnNames="member_id"
+              referencedTableName="member"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_membre_member"/>
+      <addForeignKeyConstraint
+              baseTableName="inscription_membre"
+              baseColumnNames="inscription_membre_state_id"
+              referencedTableName="inscription_membre_state"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_membre_inscription_membre_state"/>
+      <addForeignKeyConstraint
+              baseTableName="inscription_membre"
+              baseColumnNames="inscription_collaborator_id"
+              referencedTableName="inscription_collaborator"
+              referencedColumnNames="id"
+              constraintName="fk_inscription_membre_inscription_collaborator"/>
+
+  </changeSet>
+
+    <!-- Create Sequence for ContainerType -->
+  <changeSet id="3" author="your-name">
+    <createSequence sequenceName="inscription_membre_seq" startValue="1" incrementBy="1"/>
+  </changeSet>
+
+  <!-- Load Data from CSV -->
+  <changeSet id="4" author="your-name">
+    <loadData
+            file="classpath:/db/migration/data/inscription/InscriptionMembre.csv"
+            tableName="inscription_membre">
+      <column name="id" type="NUMERIC"/>
+          <column name="inscription_date" type="TIMESTAMP"/>
+          <column name="consumed_entity" type="NUMERIC"/>
+          <column name="consumed_projet" type="NUMERIC"/>
+          <column name="consumed_attribut" type="NUMERIC"/>
+          <column name="consumed_indicator" type="NUMERIC"/>
+          <column name="affected_entity" type="NUMERIC"/>
+          <column name="affected_projet" type="NUMERIC"/>
+          <column name="affected_attribut" type="NUMERIC"/>
+          <column name="affected_indicator" type="NUMERIC"/>
+        <column name="member" type="BIGINT"/>
+        <column name="inscription_membre_state" type="BIGINT"/>
+        <column name="inscription_collaborator" type="BIGINT"/>
+    </loadData>
+  </changeSet>
+
+
+</databaseChangeLog>

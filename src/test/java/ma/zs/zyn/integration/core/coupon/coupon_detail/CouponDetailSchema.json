@@ -1,0 +1,17 @@
+{
+    "packaging": {"id": "#number"},
+    "discount": "#number",
+    "amountGivenInfluencer": "#number",
+    "usingNumber": "#number",
+    "maxUsingNumber": "#number",
+    "coupon": {"id": "#number"}
+
+}
+
+
+
+
+
+
+
+

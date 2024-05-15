@@ -1,0 +1,37 @@
+{
+    "code": "code-1",
+    "name": "name-1",
+    "influencer": {"id": "1"},
+
+    "couponDetails": [
+        {
+            "packaging":{"id": "1"},
+            "discount":"10",
+            "amountGivenInfluencer":"10",
+            "usingNumber":"10",
+            "maxUsingNumber":"10"
+        },
+        {
+            "packaging":{"id": "2"},
+            "discount":"20",
+            "amountGivenInfluencer":"20",
+            "usingNumber":"20",
+            "maxUsingNumber":"20"
+        },
+        {
+            "packaging":{"id": "3"},
+            "discount":"30",
+            "amountGivenInfluencer":"30",
+            "usingNumber":"30",
+            "maxUsingNumber":"30"
+        }
+    ]
+}
+
+
+
+
+
+
+
+
