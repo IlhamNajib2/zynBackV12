@@ -2,6 +2,8 @@ package ma.zs.zyn.service.facade.admin.project;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+
 import ma.zs.zyn.bean.core.project.Project;
 import ma.zs.zyn.dao.criteria.core.project.ProjectCriteria;
 import ma.zs.zyn.zynerator.service.IService;
@@ -11,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ProjectAdminService {
 
-
+    Map<String, Long> getProjectsByMonth(int year);
     Long countProjectsByDay(LocalDate date);
     Long countProjectsByWeek(LocalDate date);
     Long countProjectsByMonth(LocalDate date);

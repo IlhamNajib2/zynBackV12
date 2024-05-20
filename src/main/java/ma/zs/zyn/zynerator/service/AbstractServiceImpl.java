@@ -5,7 +5,6 @@ import ma.zs.zyn.zynerator.exception.EntityNotFoundException;
 import ma.zs.zyn.zynerator.bean.BaseEntity;
 import ma.zs.zyn.zynerator.criteria.BaseCriteria;
 import ma.zs.zyn.zynerator.exception.BusinessRuleException;
-import ma.zs.zyn.zynerator.exception.EntityNotFoundException;
 import ma.zs.zyn.zynerator.repository.AbstractRepository;
 import ma.zs.zyn.zynerator.security.bean.User;
 import ma.zs.zyn.zynerator.security.service.facade.UserService;

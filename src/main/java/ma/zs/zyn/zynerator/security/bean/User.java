@@ -1,8 +1,8 @@
 package ma.zs.zyn.zynerator.security.bean;
 
-import ma.zs.zyn.zynerator.bean.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+import ma.zs.zyn.zynerator.bean.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "user_app_seq", sequenceName = "user_app_seq", allocationSize = 1, initialValue = 1)
-public class User  extends BaseEntity  implements UserDetails {
+public class User extends BaseEntity  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_app_seq")
     protected Long id;
@@ -34,6 +34,10 @@ public class User  extends BaseEntity  implements UserDetails {
     protected String firstName;
     protected String lastName;
     protected String phone;
+    protected String code;
+    protected LocalDateTime expirationLinkDate;
+
+
 
     @Transient
     protected Collection<GrantedAuthority> authorities;
@@ -52,7 +56,10 @@ public class User  extends BaseEntity  implements UserDetails {
         this.password = username;
         this.email = username;
     }
-
+    public User(Long id, String email) {
+        this.id = id;
+        this.email = email;
+    }
 
     public boolean getCredentialsNonExpired() {
     return credentialsNonExpired;
@@ -81,6 +88,21 @@ public class User  extends BaseEntity  implements UserDetails {
 
     public void setId(Long id) {
     this.id = id;
+    }
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public LocalDateTime getExpirationLinkDate() {
+        return expirationLinkDate;
+    }
+
+    public void setExpirationLinkDate(LocalDateTime expirationLinkDate) {
+        this.expirationLinkDate = expirationLinkDate;
     }
 
     public boolean isCredentialsNonExpired() {

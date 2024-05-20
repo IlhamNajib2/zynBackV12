@@ -1,10 +1,10 @@
 package ma.zs.zyn.zynerator.security.service.facade;
 
-import ma.zs.zyn.zynerator.security.dao.criteria.core.UserCriteria;
 import ma.zs.zyn.zynerator.security.bean.User;
+import ma.zs.zyn.zynerator.security.dao.criteria.core.UserCriteria;
+import ma.zs.zyn.zynerator.service.IService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import ma.zs.zyn.zynerator.service.IService;
 
 public interface UserService extends IService<User, UserCriteria>, UserDetailsService {
 
@@ -19,6 +19,8 @@ public interface UserService extends IService<User, UserCriteria>, UserDetailsSe
     int deleteByUsername(String username);
 
     UserDetails loadUserByUsername(String username);
+    public String generateCode(int length);
+    public User create(User t);
 
-
+    User findByCode(String code);
 }

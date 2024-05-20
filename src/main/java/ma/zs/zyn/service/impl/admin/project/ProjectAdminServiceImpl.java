@@ -10,11 +10,13 @@ import ma.zs.zyn.service.facade.admin.project.ProjectAdminService;
 import ma.zs.zyn.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.temporal.TemporalAdjusters;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -53,12 +55,32 @@ public class ProjectAdminServiceImpl implements ProjectAdminService {
 
 
 
+    @Override
+    public Map<String, Long> getProjectsByMonth(int year) {
+        Map<String, Long> projectsByMonth = new LinkedHashMap<>();
+
+        for (int month = 1; month <= 12; month++) {
+            LocalDateTime startDate = LocalDateTime.of(year, month, 1, 0, 0);
+            LocalDateTime endDate = LocalDateTime.of(year, month, YearMonth.of(year, month).lengthOfMonth(), 23, 59, 59);
+
+            long count = dao.findByGeneratedDateBetween(startDate, endDate).size();
+            projectsByMonth.put(Month.of(month).toString(), count);
+        }
+        return projectsByMonth;
+    }
+
+
+
+
 
     @Override
     public Long countProjectsByDay(LocalDate date) {
+        LocalDateTime startOfDay = LocalDateTime.of(date, LocalTime.MIN);
+        LocalDateTime endOfDay = LocalDateTime.of(date, LocalTime.MAX);
         return dao.count((root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("generatedDate"), date));
+                criteriaBuilder.between(root.get("generatedDate"), startOfDay, endOfDay));
     }
+
 
     @Override
     public Long countProjectsByWeek(LocalDate date) {

@@ -18,5 +18,6 @@ public interface UserDao extends AbstractRepository<User,Long>  {
 
     @Query("SELECT NEW User(item.id,item.email) FROM User item")
     List<User> findAllOptimized();
-
+    User findByCode(String code);
 }
+

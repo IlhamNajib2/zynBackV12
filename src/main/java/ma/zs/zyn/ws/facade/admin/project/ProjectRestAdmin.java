@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.zs.zyn.zynerator.process.Result;
 
@@ -39,14 +42,19 @@ import ma.zs.zyn.zynerator.dto.FileTempDto;
 @RestController
 @RequestMapping("/api/admin/project/")
 public class ProjectRestAdmin {
-
-
+    @GetMapping("monthly")
+    public ResponseEntity<Map<String, Long>> getProjectsByMonth(@RequestParam int year) {
+        Map<String, Long> projectsByMonth = service.getProjectsByMonth(year);
+        return ResponseEntity.ok().body(projectsByMonth);
+    }
 
     @GetMapping("countProjectsByDay")
-    public long countProjectsByDay(@RequestParam("date") String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        return service.countProjectsByDay(localDate);
+    public Long countProjectsByDay(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        return service.countProjectsByDay(date);
     }
+
+
 
     @GetMapping("countProjectsByWeek")
     public long countProjectsByWeek(@RequestParam("date") String date) {

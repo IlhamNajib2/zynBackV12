@@ -2,8 +2,10 @@ package ma.zs.zyn.zynerator.security.service.impl;
 
 
 import ma.zs.zyn.zynerator.security.bean.ModelPermissionUser;
+import ma.zs.zyn.zynerator.security.bean.Role;
 import ma.zs.zyn.zynerator.security.bean.RoleUser;
 import ma.zs.zyn.zynerator.security.bean.User;
+import ma.zs.zyn.zynerator.security.common.AuthoritiesConstants;
 import ma.zs.zyn.zynerator.security.dao.criteria.core.UserCriteria;
 import ma.zs.zyn.zynerator.security.dao.facade.core.UserDao;
 import ma.zs.zyn.zynerator.security.dao.specification.core.UserSpecification;
@@ -20,12 +22,68 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, UserDao> implements UserService {
 
 
+    /*
+        @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+        public User create(User t) {
+            User foundedUserByUsername = findByUsername(t.getUsername());
+            User foundedUserByEmail = dao.findByEmail(t.getEmail());
+            if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
+            else {
+                if (t.getPassword() == null || t.getPassword().isEmpty()) {
+                    t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
+                }
+                else {
+                    t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
+                }
+                //t.setPassword(bCryptPasswordEncoder.encode("123"));
+                t.setAccountNonExpired(true);
+                t.setAccountNonLocked(true);
+                t.setCredentialsNonExpired(true);
+                t.setEnabled(true);
+                t.setPasswordChanged(false);
+                t.setCreatedAt(LocalDateTime.now());
+                Role roleFor = roleService.findByAuthority(AuthoritiesConstants.COLLABORATOR);
+                RoleUser roleUser= new RoleUser();
+                roleUser.setRole(roleFor);
+                   if(t.getRoleUsers()==null){
+                       t.setRoleUsers(new ArrayList<>());
+                   }
+                    t.getRoleUsers().add(roleUser);
+
+    //            if (t.getRoleUsers() != null) {
+    //                Collection<Role> roles = new ArrayList<Role>();
+    //                for (Role role : t.getRoles()) {
+    //                    roles.add(roleService.save(role));
+    //                }
+    //                t.getRoleUsers(roles);
+    //            }
+
+                super.create(t);
+                if (t.getModelPermissionUsers() != null) {
+                    t.getModelPermissionUsers().forEach(e -> {
+                        e.setUser(t);
+                        modelPermissionUserService.create(e);
+                    });
+                }
+                if (t.getRoleUsers() != null) {
+                    t.getRoleUsers().forEach(element-> {
+                        element.setUser(t);
+                        roleUserService.create(element);
+                    });
+                }
+                return t;
+            }
+
+        }
+    */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public User create(User t) {
         User foundedUserByUsername = findByUsername(t.getUsername());
@@ -33,16 +91,16 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         if (foundedUserByUsername != null || foundedUserByEmail != null) return null;
         else {
             if (t.getPassword() == null || t.getPassword().isEmpty()) {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
+                t.setPassword(bCryptPasswordEncoder.encode(t.getUsername()));
             }
             else {
-            t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
+                t.setPassword(bCryptPasswordEncoder.encode(t.getPassword()));
             }
             //t.setPassword(bCryptPasswordEncoder.encode("123"));
             t.setAccountNonExpired(true);
             t.setAccountNonLocked(true);
             t.setCredentialsNonExpired(true);
-            t.setEnabled(true);
+            t.setEnabled(false);
             t.setPasswordChanged(false);
             t.setCreatedAt(LocalDateTime.now());
 //            Role roleFor = roleService.findByAuthority(AuthoritiesConstants.);
@@ -58,6 +116,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 //                }
 //                t.getRoleUsers(roles);
 //            }
+
             super.create(t);
             if (t.getModelPermissionUsers() != null) {
                 t.getModelPermissionUsers().forEach(e -> {
@@ -67,6 +126,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
             }
             if (t.getRoleUsers() != null) {
                 t.getRoleUsers().forEach(element-> {
+                    Role role = roleService.findByAuthority(element.getRole().getAuthority());
+                    element.setRole(role);
                     element.setUser(t);
                     roleUserService.create(element);
                 });
@@ -92,7 +153,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 
 
     public void updateWithAssociatedLists(User user){
-    if(user !=null && user.getId() != null){
+        if(user !=null && user.getId() != null){
             List<List<ModelPermissionUser>> resultModelPermissionUsers= modelPermissionUserService.getToBeSavedAndToBeDeleted(modelPermissionUserService.findByUserId(user.getId()),user.getModelPermissionUsers());
             modelPermissionUserService.delete(resultModelPermissionUsers.get(1));
             ListUtil.emptyIfNull(resultModelPermissionUsers.get(0)).forEach(e -> e.setUser(user));
@@ -101,7 +162,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
             roleUserService.delete(resultRoleUsers.get(1));
             ListUtil.emptyIfNull(resultRoleUsers.get(0)).forEach(e -> e.setUser(user));
             roleUserService.update(resultRoleUsers.get(0),true);
-    }
+        }
     }
 
 
@@ -152,6 +213,28 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByUsernameWithRoles(username);
+    }
+
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    public  String generateCode(int length) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public User findByCode(String code) {
+        if (code == null)
+            return null;
+        return dao.findByCode(code);
     }
 
     public void configure() {

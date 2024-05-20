@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ma.zs.zyn.bean.core.project.Project;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -24,8 +25,14 @@ public interface ProjectDao extends AbstractRepository<Project,Long>  {
     @Query("SELECT COUNT(p) FROM Project p WHERE FUNCTION('WEEK', p.generatedDate) = :week AND FUNCTION('YEAR', p.generatedDate) = :year")
     Long countProjectsByWeek(@Param("week") int week, @Param("year") int year);
 
-    @Query("SELECT COUNT(p) FROM Project p WHERE p.generatedDate = :date")
-    Long countProjectsByDay(@Param("date") LocalDate date);
+
+
+    @Query("SELECT COUNT(p) FROM Project p WHERE p.generatedDate >= :startDate AND p.generatedDate < :endDate")
+    Long countProjectsByDay(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    List<Project> findByGeneratedDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+
 
 
     List<Project> findByProjectStateCode(String code);

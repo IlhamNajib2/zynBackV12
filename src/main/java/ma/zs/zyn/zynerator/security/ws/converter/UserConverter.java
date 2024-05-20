@@ -34,12 +34,13 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
         //this.actionPermission =  actionPermission ;
     }
 
+
     @Override
     public User toItem(UserDto dto) {
         if (dto == null) {
             return null;
         } else {
-        User item = new User();
+            User item = new User();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
             if(dto.getCredentialsNonExpired() != null)
@@ -68,15 +69,24 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
             if(StringUtil.isNotEmpty(dto.getPhone()))
                 item.setPhone(dto.getPhone());
 
+            if(StringUtil.isNotEmpty(dto.getCode()))
+                item.setCode(dto.getCode());
+
+            if (dto.getExpirationLinkDate() != null)
+                item.setExpirationLinkDate(dto.getExpirationLinkDate());
+
+
 
             if(this.modelPermissionUsers && ListUtil.isNotEmpty(dto.getModelPermissionUsers()))
                 item.setModelPermissionUsers(modelPermissionUserConverter.toItem(dto.getModelPermissionUsers()));
             if(this.roleUsers && ListUtil.isNotEmpty(dto.getRoleUsers()))
                 item.setRoleUsers(roleUserConverter.toItem(dto.getRoleUsers()));
 
-        return item;
+            return item;
         }
     }
+
+
 
     @Override
     public UserDto toDto(User item) {

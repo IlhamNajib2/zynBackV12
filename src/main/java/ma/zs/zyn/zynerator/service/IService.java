@@ -2,9 +2,10 @@ package ma.zs.zyn.zynerator.service;
 
 import ma.zs.zyn.zynerator.bean.BaseEntity;
 import ma.zs.zyn.zynerator.criteria.BaseCriteria;
-import ma.zs.zyn.zynerator.security.bean.User;
 
 import java.util.List;
+
+import ma.zs.zyn.zynerator.security.bean.User;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IService<T extends BaseEntity, Criteria extends BaseCriteria> {

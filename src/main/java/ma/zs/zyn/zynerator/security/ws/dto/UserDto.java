@@ -3,6 +3,7 @@ package ma.zs.zyn.zynerator.security.ws.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.zs.zyn.zynerator.dto.AuditBaseDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -23,6 +24,8 @@ public class UserDto  extends AuditBaseDto {
     protected String firstName;
     protected String lastName;
     protected String phone;
+    protected String code;
+    protected LocalDateTime expirationLinkDate;
 
     private List<ModelPermissionUserDto> modelPermissionUsers ;
     private List<RoleUserDto> roleUsers ;
@@ -39,6 +42,21 @@ public class UserDto  extends AuditBaseDto {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public LocalDateTime getExpirationLinkDate() {
+        return expirationLinkDate;
+    }
+
+    public void setExpirationLinkDate(LocalDateTime expirationLinkDate) {
+        this.expirationLinkDate = expirationLinkDate;
+    }
 
     public Boolean getEnabled(){
         return this.enabled;

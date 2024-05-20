@@ -7,8 +7,7 @@ import ma.zs.zyn.dao.criteria.core.collaborator.CollaboratorCriteria;
 import ma.zs.zyn.dao.facade.core.collaborator.CollaboratorDao;
 import ma.zs.zyn.dao.specification.core.collaborator.CollaboratorSpecification;
 import ma.zs.zyn.service.facade.member.collaborator.CollaboratorMemberService;
-import ma.zs.zyn.zynerator.service.AbstractServiceImpl;
-import ma.zs.zyn.zynerator.util.ListUtil;
+import ma.zs.zyn.zynerator.security.service.facade.UserService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
@@ -26,15 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
-import ma.zs.zyn.zynerator.security.service.facade.UserService;
+
 import ma.zs.zyn.zynerator.security.service.facade.RoleService;
 import ma.zs.zyn.zynerator.security.service.facade.RoleUserService;
 import ma.zs.zyn.zynerator.security.bean.Role;
 import ma.zs.zyn.zynerator.security.bean.RoleUser;
 import ma.zs.zyn.zynerator.security.common.AuthoritiesConstants;
 import ma.zs.zyn.zynerator.security.service.facade.ModelPermissionUserService;
-import java.util.Collection;
-import java.util.List;
+
 @Service
 public class CollaboratorMemberServiceImpl implements CollaboratorMemberService {
 
