@@ -9,16 +9,14 @@ import java.util.Objects;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ma.zs.zyn.zynerator.bean.BaseEntity;
 import jakarta.persistence.*;
-import java.util.Objects;
 import ma.zs.zyn.zynerator.security.bean.User;
 
 @Entity
 @Table(name = "member")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @SequenceGenerator(name="member_seq",sequenceName="member_seq",allocationSize=1, initialValue = 1)
-public class Member  extends User    {
+public class Member  extends User {
 
 
     public Member(String username) {

@@ -15,8 +15,6 @@ public class ActionPermissionDto  extends AuditBaseDto {
     private String libelle  ;
 
 
-
-
     public ActionPermissionDto(){
         super();
     }

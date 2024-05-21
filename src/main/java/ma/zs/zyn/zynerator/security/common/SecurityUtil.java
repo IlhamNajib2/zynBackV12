@@ -2,6 +2,8 @@ package ma.zs.zyn.zynerator.security.common;
 
 import java.util.stream.Stream;
 
+import ma.zs.zyn.zynerator.security.bean.User;
+import ma.zs.zyn.zynerator.security.service.facade.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -9,8 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import ma.zs.zyn.ZynApplication;
-import ma.zs.zyn.zynerator.security.bean.User;
-import ma.zs.zyn.zynerator.security.service.facade.UserService;
 
 
 @Service
