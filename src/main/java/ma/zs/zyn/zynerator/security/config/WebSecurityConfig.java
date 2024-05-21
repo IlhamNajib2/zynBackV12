@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/verify").permitAll()
@@ -79,6 +80,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/member/**").hasAnyAuthority(AuthoritiesConstants.MEMBER)
                         .requestMatchers("/api/influencer/**").hasAnyAuthority(AuthoritiesConstants.INFLUENCER)
                         .anyRequest().authenticated()
+
 
                 );
 

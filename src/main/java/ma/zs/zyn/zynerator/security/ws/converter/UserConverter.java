@@ -35,6 +35,7 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
     }
 
 
+
     @Override
     public User toItem(UserDto dto) {
         if (dto == null) {
@@ -85,7 +86,6 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
             return item;
         }
     }
-
 
 
     @Override
