@@ -1,6 +1,8 @@
 package ma.zs.zyn.service.impl.collaborator.paiment;
 
 
+import ma.zs.zyn.bean.core.coupon.Coupon;
+import ma.zs.zyn.service.facade.collaborator.coupon.CouponCollaboratorService;
 import ma.zs.zyn.zynerator.exception.EntityNotFoundException;
 import ma.zs.zyn.bean.core.paiment.PaimentCollaborator;
 import ma.zs.zyn.dao.criteria.core.paiment.PaimentCollaboratorCriteria;
@@ -10,6 +12,9 @@ import ma.zs.zyn.service.facade.collaborator.paiment.PaimentCollaboratorCollabor
 import ma.zs.zyn.zynerator.service.AbstractServiceImpl;
 import ma.zs.zyn.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
@@ -190,7 +195,7 @@ public class PaimentCollaboratorCollaboratorServiceImpl implements PaimentCollab
         }
 		return result;
     }
-
+/*
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public PaimentCollaborator create(PaimentCollaborator t) {
         PaimentCollaborator loaded = findByReferenceEntity(t);
@@ -203,6 +208,63 @@ public class PaimentCollaboratorCollaboratorServiceImpl implements PaimentCollab
         return saved;
     }
 
+ */
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+public PaimentCollaborator create(PaimentCollaborator paimentCollaborator) {
+    paimentCollaborator.setPaiementDate(LocalDateTime.now());
+    CouponDetail coupon = null;
+    if (!paimentCollaborator.getCouponDetail().getCoupon().getName().isEmpty()) {
+        coupon =couponDetailService.findByCouponName(paimentCollaborator.getCouponDetail().getCoupon().getName());
+        paimentCollaborator.setCouponDetail(coupon);
+    }
+    String paimentStateName = determinePaymentState(paimentCollaborator);
+    PaimentCollaboratorState paimentCollaboratorState = paimentCollaboratorStateService.findBylibelle(paimentStateName);
+    paimentCollaborator.setPaimentCollaboratorState(paimentCollaboratorState);
+    PaimentCollaborator saved= dao.save(paimentCollaborator);
+    return saved;
+}
+
+    private String determinePaymentState(PaimentCollaborator paimentCollaborator) {
+        if (paimentCollaborator.getAmountToPaid().compareTo(BigDecimal.ZERO) > 0) {
+            return "PAID";
+        }
+        else if (  paimentCollaborator.getAmountToPaid().equals(0) && paimentCollaborator.getPaiementDate().isAfter(LocalDateTime.now())) {
+            return "PENDING";
+        }
+        else {
+            return "OVERDUE";
+        }
+    }
+
+
+/*
+    public BigDecimal CalcultotalRestant(String couponName,BigDecimal total){
+        Coupon coupon = null;
+        coupon =couponService.findByName(couponName);
+
+        BigDecimal reduction = BigDecimal.ZERO;
+        if (coupon != null && coupon.getDateFin().isAfter(LocalDateTime.now()) ) {
+            reduction = calculateReduction(total, coupon);
+            couponService.incrementUsingNumber(coupon.getName(),new BigDecimal(1));
+        }
+        BigDecimal totalRestant = total.subtract(reduction);
+        return totalRestant;
+    }
+
+
+
+
+
+
+    private BigDecimal calculateReduction(BigDecimal total, Coupon coupon) {
+        if (coupon.getPourcentageCoupon()!=null) {
+            BigDecimal percentageReduction = total.multiply(coupon.getPourcentageCoupon().divide(BigDecimal.valueOf(100)));
+            return percentageReduction;
+        } else {
+            return BigDecimal.ZERO;
+        }
+    }
+*/
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<PaimentCollaborator> create(List<PaimentCollaborator> ts) {
         List<PaimentCollaborator> result = new ArrayList<>();
@@ -288,6 +350,8 @@ public class PaimentCollaboratorCollaboratorServiceImpl implements PaimentCollab
 
     @Autowired
     private CouponDetailCollaboratorService couponDetailService ;
+
+
     @Autowired
     private PaimentCollaboratorStateCollaboratorService paimentCollaboratorStateService ;
     @Autowired

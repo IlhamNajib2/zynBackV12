@@ -14,4 +14,5 @@ public interface InscriptionCollaboratorStateDao extends AbstractRepository<Insc
     @Query("SELECT NEW InscriptionCollaboratorState(item.id,item.name) FROM InscriptionCollaboratorState item")
     List<InscriptionCollaboratorState> findAllOptimized();
 
+    InscriptionCollaboratorState findByCode(String code);
 }

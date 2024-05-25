@@ -54,4 +54,5 @@ public interface InscriptionCollaboratorTypeCollaboratorService {
 
     List<InscriptionCollaboratorType> importExcel(MultipartFile file);
 
+    InscriptionCollaboratorType findByName(String name);
 }

@@ -54,4 +54,8 @@ public interface PaimentCollaboratorStateCollaboratorService {
 
     List<PaimentCollaboratorState> importExcel(MultipartFile file);
 
+    PaimentCollaboratorState findBylibelle(String name);
+
+
+
 }

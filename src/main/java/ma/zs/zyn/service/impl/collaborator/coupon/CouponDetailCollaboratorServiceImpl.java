@@ -267,11 +267,10 @@ public class CouponDetailCollaboratorServiceImpl implements CouponDetailCollabor
         return null;
     }
 
-
-
-
-
-
+    @Override
+    public CouponDetail findByCouponName(String name) {
+        return dao.findByCouponName(name);
+    }
 
 
     @Autowired

@@ -14,4 +14,5 @@ public interface InscriptionCollaboratorTypeDao extends AbstractRepository<Inscr
     @Query("SELECT NEW InscriptionCollaboratorType(item.id,item.name) FROM InscriptionCollaboratorType item")
     List<InscriptionCollaboratorType> findAllOptimized();
 
+    InscriptionCollaboratorType findByName(String name);
 }

@@ -7,7 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -38,6 +41,35 @@ import ma.zs.zyn.zynerator.dto.FileTempDto;
 @RequestMapping("/api/admin/inscriptionCollaborator/")
 public class InscriptionCollaboratorRestAdmin {
 
+
+
+    @GetMapping("countInscriptionsByDay")
+    public ResponseEntity<Long> countInscriptionsByDay(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long count = service.countInscriptionsByDay(localDate);
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("countInscriptionsByMonth")
+    public ResponseEntity<Long> countInscriptionsByMonth(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long count = service.countInscriptionsByMonth(localDate);
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("countInscriptionsByWeek")
+    public ResponseEntity<Long> countInscriptionsByWeek(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long count = service.countInscriptionsByWeek(localDate);
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("countInscriptionsByYear")
+    public ResponseEntity<Long> countInscriptionsByYear(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long count = service.countInscriptionsByYear(localDate);
+        return ResponseEntity.ok(count);
+    }
 
 
 

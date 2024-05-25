@@ -237,12 +237,10 @@ public class PaimentCollaboratorStateCollaboratorServiceImpl implements PaimentC
         return null;
     }
 
-
-
-
-
-
-
+    @Override
+    public PaimentCollaboratorState findBylibelle(String name) {
+        return dao.findBylibelle(name) ;
+    }
 
 
     private @Autowired PaimentCollaboratorStateDao dao;

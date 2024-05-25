@@ -54,4 +54,5 @@ public interface InscriptionCollaboratorStateCollaboratorService {
 
     List<InscriptionCollaboratorState> importExcel(MultipartFile file);
 
+    InscriptionCollaboratorState findByCode(String code);
 }

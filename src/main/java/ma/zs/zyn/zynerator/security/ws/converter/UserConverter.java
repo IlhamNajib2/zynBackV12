@@ -80,8 +80,13 @@ public class UserConverter extends AbstractConverter<User, UserDto> {
 
             if(this.modelPermissionUsers && ListUtil.isNotEmpty(dto.getModelPermissionUsers()))
                 item.setModelPermissionUsers(modelPermissionUserConverter.toItem(dto.getModelPermissionUsers()));
-            if(this.roleUsers && ListUtil.isNotEmpty(dto.getRoleUsers()))
+            if(this.roleUsers && ListUtil.isNotEmpty(dto.getRoleUsers())){
+                roleUserConverter.init(true);
+                roleUserConverter.setUser(false);
                 item.setRoleUsers(roleUserConverter.toItem(dto.getRoleUsers()));
+                roleUserConverter.setUser(true);
+            }
+
 
             return item;
         }

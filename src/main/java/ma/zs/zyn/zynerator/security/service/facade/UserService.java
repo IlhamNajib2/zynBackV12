@@ -23,4 +23,6 @@ public interface UserService extends IService<User, UserCriteria>, UserDetailsSe
     public User create(User t);
 
     User findByCode(String code);
+
+    User findByEmail(String email);
 }
