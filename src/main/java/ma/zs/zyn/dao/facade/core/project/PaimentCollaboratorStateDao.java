@@ -17,4 +17,6 @@ public interface PaimentCollaboratorStateDao extends AbstractRepository<PaimentC
     @Query("SELECT NEW PaimentCollaboratorState(item.id,item.code) FROM PaimentCollaboratorState item")
     List<PaimentCollaboratorState> findAllOptimized();
 
+    PaimentCollaboratorState findBylibelle(String libelle);
+
 }

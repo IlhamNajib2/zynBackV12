@@ -1,5 +1,6 @@
 package ma.zs.zyn.service.facade.admin.inscription;
 
+import java.time.LocalDate;
 import java.util.List;
 import ma.zs.zyn.bean.core.inscription.InscriptionCollaborator;
 import ma.zs.zyn.dao.criteria.core.inscription.InscriptionCollaboratorCriteria;
@@ -29,6 +30,15 @@ public interface InscriptionCollaboratorAdminService {
 
 
 	InscriptionCollaborator create(InscriptionCollaborator t);
+
+
+    Long countInscriptionsByDay(LocalDate date);
+
+    Long countInscriptionsByMonth(LocalDate date);
+
+    Long countInscriptionsByWeek(LocalDate date);
+
+    Long countInscriptionsByYear(LocalDate date);
 
     InscriptionCollaborator update(InscriptionCollaborator t);
 

@@ -10,6 +10,10 @@ import ma.zs.zyn.service.facade.collaborator.inscription.InscriptionCollaborator
 import ma.zs.zyn.zynerator.service.AbstractServiceImpl;
 import ma.zs.zyn.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
@@ -211,7 +215,7 @@ public class InscriptionCollaboratorCollaboratorServiceImpl implements Inscripti
         }
 		return result;
     }
-
+/*
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public InscriptionCollaborator create(InscriptionCollaborator t) {
         InscriptionCollaborator loaded = findByReferenceEntity(t);
@@ -229,6 +233,31 @@ public class InscriptionCollaboratorCollaboratorServiceImpl implements Inscripti
         }
         return saved;
     }
+
+
+ */
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+public InscriptionCollaborator create(InscriptionCollaborator t) {
+    t.setStartDate(LocalDateTime.now());
+    t.setEndDate(LocalDateTime.now().plus(1, ChronoUnit.MONTHS));
+    t.setRenewDate(null);
+    InscriptionCollaboratorState inscriptionCollaboratorState =inscriptionCollaboratorStateService.findByCode("c3");
+    t.setInscriptionCollaboratorState(inscriptionCollaboratorState);
+
+    InscriptionCollaboratorType inscriptionCollaboratorType = inscriptionCollaboratorTypeService.findByName(t.getInscriptionCollaboratorType().getName());
+    t.setInscriptionCollaboratorType(inscriptionCollaboratorType);
+    InscriptionCollaborator saved= dao.save(t);
+    if (t.getInscriptionMembres() != null) {
+        t.getInscriptionMembres().forEach(element-> {
+            element.setInscriptionCollaborator(saved);
+            inscriptionMembreService.create(element);
+        });
+    }
+    return saved;
+
+}
+
+
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public List<InscriptionCollaborator> create(List<InscriptionCollaborator> ts) {
@@ -319,8 +348,59 @@ public class InscriptionCollaboratorCollaboratorServiceImpl implements Inscripti
     }
 
 
+/*
+   //ajouter
+    @Override
+    public InscriptionCollaborator update(InscriptionCollaborator inscriptionCollaborator) {
+        if (!(inscriptionCollaborator.getConsumedEntity().equals(0)) && inscriptionCollaborator.getMaxEntity().compareTo(inscriptionCollaborator.getConsumedEntity()) > 0 && inscriptionCollaborator.getEndDate().isBefore(LocalDateTime.now())) {
+            InscriptionCollaboratorState inscriptionCollaboratorState = inscriptionCollaboratorStateService.findByCode("etat1");
+            inscriptionCollaborator.setInscriptionCollaboratorState(inscriptionCollaboratorState);
+            BigDecimal restEntity = inscriptionCollaborator.getMaxEntity().subtract(inscriptionCollaborator.getConsumedEntity());
+            inscriptionCollaborator.setMaxEntity(restEntity);
+        } else if (inscriptionCollaborator.getConsumedEntity().compareTo(inscriptionCollaborator.getMaxEntity()) == 0 && inscriptionCollaborator.getEndDate().isAfter(LocalDateTime.now())) {
+            inscriptionCollaborator.getCollaborator().setEnabled(false);
+            inscriptionCollaborator.getCollaborator().setAccountNonExpired(false);
+            paimentCollaboratorService.makePaiment(inscriptionCollaborator);
+            inscriptionCollaborator.getCollaborator().setEnabled(true);
+            inscriptionCollaborator.getCollaborator().setAccountNonExpired(true);
+            inscriptionCollaborator.setMaxEntity(inscriptionCollaborator.getPackaging().getMaxEntity());
+        }else if (inscriptionCollaborator.getCollaborator().getEnabled() == false && inscriptionCollaborator.getCollaborator().getAccountNonExpired() == false && inscriptionCollaborator.getEndDate().isAfter(LocalDateTime.now())) {
+            paimentCollaboratorService.makePaiment(inscriptionCollaborator);
+            inscriptionCollaborator.getCollaborator().setEnabled(true);
+            inscriptionCollaborator.getCollaborator().setAccountNonExpired(true);
+            InscriptionCollaboratorState inscriptionCollaboratorState = inscriptionCollaboratorStateService.findByCode("etat1");
+            inscriptionCollaborator.setInscriptionCollaboratorState(inscriptionCollaboratorState);
+        }else {
+            InscriptionCollaboratorState inscriptionCollaboratorState = inscriptionCollaboratorStateService.findByCode("etat2");
+            inscriptionCollaborator.setInscriptionCollaboratorState(inscriptionCollaboratorState);
+        }
+        InscriptionCollaborator updateed =super.update(inscriptionCollaborator);
+        return updateed;
+    }
+ */
 
+    /*
+    @Scheduled(cron = "0 0 0 * * *")
+    public void verification() {
+        LocalDate currentDate = LocalDate.now();
+        List<InscriptionCollaborator> inscriptionCollaborators = dao.findAll();
 
+        for (InscriptionCollaborator : inscriptionCollaborators) {
+            LocalDate endDate = inscriptionCollaborator.getEndDate();
+            if (endDate != null && endDate.isEqual(currentDate)) {
+                inscriptionCollaborator.getCollaborator().setAccountNonExpired(false);
+                inscriptionCollaborator.getCollaborator().setEnabled(false);
+              // memberService . findByCollaboratorUsername String username
+               List<Member> members = memberService.findByCollaboratorUsername( inscriptionCollaborator.getCollaborator().getUsername)
+               for member in members {
+                    member.setAccountNonExpired(false);
+                    member.setEnabled(false);
+                    memberService.update member
+                    }
+                dao.save(inscriptionCollaborator); // Assuming CollaboratorRepository has a save method to update collaborator
+            }
+        }
+    }*/
 
 
 

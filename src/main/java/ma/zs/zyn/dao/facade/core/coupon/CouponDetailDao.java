@@ -17,4 +17,6 @@ public interface CouponDetailDao extends AbstractRepository<CouponDetail,Long>  
     long countByCouponCode(String code);
 
 
+    CouponDetail findByCouponName(String name);
+
 }

@@ -60,4 +60,6 @@ public interface CouponDetailCollaboratorService {
 
     List<CouponDetail> importExcel(MultipartFile file);
 
+    CouponDetail findByCouponName(String name);
+
 }

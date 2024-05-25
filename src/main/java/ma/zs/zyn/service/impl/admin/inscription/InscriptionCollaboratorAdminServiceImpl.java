@@ -7,9 +7,13 @@ import ma.zs.zyn.dao.criteria.core.inscription.InscriptionCollaboratorCriteria;
 import ma.zs.zyn.dao.facade.core.inscription.InscriptionCollaboratorDao;
 import ma.zs.zyn.dao.specification.core.inscription.InscriptionCollaboratorSpecification;
 import ma.zs.zyn.service.facade.admin.inscription.InscriptionCollaboratorAdminService;
-import ma.zs.zyn.zynerator.service.AbstractServiceImpl;
 import ma.zs.zyn.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.data.domain.PageRequest;
@@ -25,19 +29,58 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ma.zs.zyn.service.facade.admin.collaborator.CollaboratorAdminService ;
-import ma.zs.zyn.bean.core.collaborator.Collaborator ;
 import ma.zs.zyn.service.facade.admin.inscription.InscriptionMembreAdminService ;
 import ma.zs.zyn.bean.core.inscription.InscriptionMembre ;
 import ma.zs.zyn.service.facade.admin.inscription.InscriptionCollaboratorTypeAdminService ;
-import ma.zs.zyn.bean.core.inscription.InscriptionCollaboratorType ;
 import ma.zs.zyn.service.facade.admin.packaging.PackagingAdminService ;
-import ma.zs.zyn.bean.core.packaging.Packaging ;
 import ma.zs.zyn.service.facade.admin.inscription.InscriptionCollaboratorStateAdminService ;
-import ma.zs.zyn.bean.core.inscription.InscriptionCollaboratorState ;
 
-import java.util.List;
 @Service
 public class InscriptionCollaboratorAdminServiceImpl implements InscriptionCollaboratorAdminService {
+
+
+
+
+
+
+
+
+    @Override
+    public Long countInscriptionsByDay(LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();
+        return dao.countInscriptionsByDay(startOfDay, endOfDay);
+    }
+
+    @Override
+    public Long countInscriptionsByMonth(LocalDate date) {
+        LocalDateTime startOfMonth = date.withDayOfMonth(1).atStartOfDay();
+        LocalDateTime endOfMonth = date.with(TemporalAdjusters.lastDayOfMonth()).plusDays(1).atStartOfDay();
+        return dao.countInscriptionsByMonth(startOfMonth, endOfMonth);
+    }
+
+    @Override
+    public Long countInscriptionsByWeek(LocalDate date) {
+        LocalDate startOfWeek = date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate endOfWeek = date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        LocalDateTime startOfWeekDateTime = startOfWeek.atStartOfDay();
+        LocalDateTime endOfWeekDateTime = endOfWeek.plusDays(1).atStartOfDay();
+        return dao.countInscriptionsByWeek(startOfWeekDateTime, endOfWeekDateTime);
+    }
+
+    @Override
+    public Long countInscriptionsByYear(LocalDate date) {
+        LocalDateTime startOfYear = date.withDayOfYear(1).atStartOfDay();
+        LocalDateTime endOfYear = date.with(TemporalAdjusters.lastDayOfYear()).plusDays(1).atStartOfDay();
+        return dao.countInscriptionsByYear(startOfYear, endOfYear);
+    }
+
+
+
+
+
+
+
 
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)

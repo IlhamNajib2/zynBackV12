@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -37,6 +39,36 @@ import ma.zs.zyn.zynerator.dto.FileTempDto;
 @RestController
 @RequestMapping("/api/admin/paimentCollaborator/")
 public class PaimentCollaboratorRestAdmin {
+
+
+    @GetMapping("/sumPaymentsByDay")
+    public ResponseEntity<Long> sumPaymentsByDay(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long sum = service.sumPaymentsByDay(localDate);
+        return ResponseEntity.ok(sum);
+    }
+
+    @GetMapping("/sumPaymentsByMonth")
+    public ResponseEntity<Long> sumPaymentsByMonth(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long sum = service.sumPaymentsByMonth(localDate);
+        return ResponseEntity.ok(sum);
+    }
+
+    @GetMapping("/sumPaymentsByWeek")
+    public ResponseEntity<Long> sumPaymentsByWeek(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long sum = service.sumPaymentsByWeek(localDate);
+        return ResponseEntity.ok(sum);
+    }
+
+    @GetMapping("/sumPaymentsByYear")
+    public ResponseEntity<Long> sumPaymentsByYear(@RequestParam("date") String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        Long sum = service.sumPaymentsByYear(localDate);
+        return ResponseEntity.ok(sum);
+    }
+
 
 
 

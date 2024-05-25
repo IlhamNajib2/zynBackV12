@@ -237,12 +237,10 @@ public class InscriptionCollaboratorStateCollaboratorServiceImpl implements Insc
         return null;
     }
 
-
-
-
-
-
-
+    @Override
+    public InscriptionCollaboratorState findByCode(String code) {
+        return dao.findByCode(code);
+    }
 
 
     private @Autowired InscriptionCollaboratorStateDao dao;

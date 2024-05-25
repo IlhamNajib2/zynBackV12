@@ -65,10 +65,8 @@ public class PaimentCollaboratorConverter {
             if(this.couponDetail && dto.getCouponDetail()!=null)
                 item.setCouponDetail(couponDetailConverter.toItem(dto.getCouponDetail())) ;
 
-            if(dto.getInscriptionCollaborator() != null && dto.getInscriptionCollaborator().getId() != null){
-                item.setInscriptionCollaborator(new InscriptionCollaborator());
-                item.getInscriptionCollaborator().setId(dto.getInscriptionCollaborator().getId());
-                item.getInscriptionCollaborator().setId(dto.getInscriptionCollaborator().getId());
+            if(dto.getInscriptionCollaborator() != null){
+                item.setInscriptionCollaborator(inscriptionCollaboratorConverter.toItem(dto.getInscriptionCollaborator()));
             }
 
             if(this.paimentCollaboratorState && dto.getPaimentCollaboratorState()!=null)

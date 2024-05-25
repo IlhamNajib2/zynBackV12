@@ -237,12 +237,10 @@ public class InscriptionCollaboratorTypeCollaboratorServiceImpl implements Inscr
         return null;
     }
 
-
-
-
-
-
-
+    @Override
+    public InscriptionCollaboratorType findByName(String name) {
+        return dao.findByName(name);
+    }
 
 
     private @Autowired InscriptionCollaboratorTypeDao dao;

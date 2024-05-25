@@ -137,6 +137,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
 
     }
 
+
     public User findWithAssociatedLists(Long id){
         User result = dao.findById(id).orElse(null);
         if(result!=null && result.getId() != null) {
@@ -235,6 +236,11 @@ public class UserServiceImpl extends AbstractServiceImpl<User, UserCriteria, Use
         if (code == null)
             return null;
         return dao.findByCode(code);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return dao.findByEmail(email);
     }
 
     public void configure() {

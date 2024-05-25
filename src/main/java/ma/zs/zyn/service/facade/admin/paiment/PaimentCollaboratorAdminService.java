@@ -1,5 +1,6 @@
 package ma.zs.zyn.service.facade.admin.paiment;
 
+import java.time.LocalDate;
 import java.util.List;
 import ma.zs.zyn.bean.core.paiment.PaimentCollaborator;
 import ma.zs.zyn.dao.criteria.core.paiment.PaimentCollaboratorCriteria;
@@ -26,6 +27,14 @@ public interface PaimentCollaboratorAdminService {
 
 
 	PaimentCollaborator create(PaimentCollaborator t);
+
+    Long sumPaymentsByDay(LocalDate date);
+
+    Long sumPaymentsByMonth(LocalDate date);
+
+    Long sumPaymentsByWeek(LocalDate date);
+
+    Long sumPaymentsByYear(LocalDate date);
 
     PaimentCollaborator update(PaimentCollaborator t);
 

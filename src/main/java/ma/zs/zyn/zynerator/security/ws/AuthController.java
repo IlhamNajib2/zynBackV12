@@ -3,6 +3,16 @@ package ma.zs.zyn.zynerator.security.ws;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import ma.zs.zyn.bean.core.inscription.InscriptionCollaborator;
+import ma.zs.zyn.bean.core.paiment.PaimentCollaborator;
+import ma.zs.zyn.bean.core.project.PaimentCollaboratorState;
+import ma.zs.zyn.service.facade.collaborator.inscription.InscriptionCollaboratorCollaboratorService;
+import ma.zs.zyn.service.impl.collaborator.inscription.InscriptionCollaboratorCollaboratorServiceImpl;
+import ma.zs.zyn.service.impl.collaborator.paiment.PaimentCollaboratorCollaboratorServiceImpl;
+import ma.zs.zyn.ws.converter.inscription.InscriptionCollaboratorConverter;
+import ma.zs.zyn.ws.converter.paiment.PaimentCollaboratorConverter;
+import ma.zs.zyn.ws.dto.inscription.InscriptionCollaboratorDto;
+import ma.zs.zyn.ws.dto.paiment.PaimentCollaboratorDto;
 import ma.zs.zyn.zynerator.security.bean.EmailRequest;
 import ma.zs.zyn.zynerator.security.bean.Role;
 import ma.zs.zyn.zynerator.security.bean.RoleUser;
@@ -78,6 +88,14 @@ public class AuthController {
   RoleUserConverter roleUserConverter;
   @Autowired
   UserConverter userConverter;
+  @Autowired
+  InscriptionCollaboratorConverter inscriptionConverter;
+  @Autowired
+  PaimentCollaboratorConverter paimentConverter;
+  @Autowired
+  InscriptionCollaboratorCollaboratorServiceImpl inscriptionCollaboratorService;
+  @Autowired
+  PaimentCollaboratorCollaboratorServiceImpl paimentService;
 
 
   @PostMapping("login")
@@ -114,61 +132,21 @@ public class AuthController {
                     roles)); }
 
 
-/*
-  @PostMapping("register")
-  public ResponseEntity<Map<String, String>> register(@RequestBody UserDto userDto){
-    if(userRepository.findByUsername(userDto.getUsername())!=null){
-      return ResponseEntity
-              .badRequest()
-              .body(Collections.singletonMap("error", "This username has already been taken"));
-    }
-    User user = new User();
-    user.setUsername(userDto.getUsername());
-    user.setEmail(userDto.getEmail());
-    user.setFirstName(userDto.getFirstName());
-    user.setLastName(userDto.getLastName());
-    user.setPhone(userDto.getPhone());
-    user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-    user.setEnabled(false);
-    LocalDateTime expirationDate = LocalDateTime.now().plus(24, ChronoUnit.HOURS);
-    user.setExpirationLinkDate(expirationDate);
 
-    /*
-     RoleUser roleUser = new RoleUser();
-     Role roles =  roleRepository.findByLabel("Admin");
-     if (roles == null) {
-         return new ResponseEntity<>("role not found", HttpStatus.BAD_REQUEST);
-     }
-     roleUser.setRole(roles);
-     roleUser.setUser(user);
-     user.setRoleUsers(Collections.singletonList(roleUser));
-
-    user.setCode(user.getUsername()+userService.generateCode(8));
-    EmailRequest emailRequest = new EmailRequest();
-    emailRequest.setFrom("najibilham841@gmail.com");
-    emailRequest.setBcc(user.getEmail());
-    emailRequest.setCc(user.getEmail());
-    emailRequest.setTo(user.getEmail());
-    emailRequest.setSubject("Verify your email");
-    emailRequest.setBody("Link to verify your email and it will expired by 24h from now : http://localhost:8036/verify?code=" + user.getCode());
-    userRepository.save(user);
-    emailService.sendSimpleMessage(emailRequest);
-
-    Map<String, String> response = new HashMap<>();
-    response.put("message", "you have registered successfully");
-    return ResponseEntity.ok(response);}
-
-
-
-*/
 
 
   @PostMapping("register")
   public ResponseEntity<Map<String, String>> register(@RequestBody UserDto userDto){
+
     if(userRepository.findByUsername(userDto.getUsername()) != null){
       return ResponseEntity
               .badRequest()
               .body(Collections.singletonMap("error", "This username has already been taken"));
+    }
+    if(userRepository.findByEmail(userDto.getEmail()) != null){
+      return ResponseEntity
+              .badRequest()
+              .body(Collections.singletonMap("error", "This email is already on use "));
     }
 
 
@@ -184,6 +162,7 @@ public class AuthController {
     emailRequest.setSubject("Verify your email");
     emailRequest.setBody("Link to verify your email and it will expire in 24 hours: http://localhost:8036/verify?code=" + userDto.getCode());
     User user = userConverter.toItem(userDto);
+
     userServiceimpl.create(user);
     emailService.sendSimpleMessage(emailRequest);
 
@@ -201,6 +180,7 @@ public class AuthController {
   public ResponseEntity<Map<String, String>> forgetPassword(@RequestBody ForgetPasswordRequest forgetPasswordRequest){
     User user = userRepository.findByEmail(forgetPasswordRequest.getEmail());
     user.setPassword(passwordEncoder.encode(forgetPasswordRequest.getPassword()));
+    user.setEnabled(false);
     userService.update(user);
     if(user!=null ){
 
@@ -224,7 +204,9 @@ public class AuthController {
   @GetMapping("changePassword")
   public ResponseEntity<?>  ChangePassword(@RequestParam("code") String code, HttpServletResponse response){
     User user = userService.findByCode(code);
+
     if (user != null) {
+      user.setEnabled(true);
       String activationLink = "http://localhost:4200/";
       String htmlResponse = "<html><body><a href=\"" + activationLink + "\" style=\"font-size: 30px;\">Click here to return to application </a></body></html>";
       return ResponseEntity.ok(htmlResponse);
@@ -261,28 +243,42 @@ public class AuthController {
   }
 
 
-/*
-  @GetMapping("verify")
-  public ResponseEntity<?> verifyUser(@RequestParam("code") String code, HttpServletResponse response) {
-    User user = userService.findByCode(code);
-    if (user != null) {
-      user.setEnabled(true);
-      userService.update(user);
 
+  @PostMapping("saveCollaborator")
+  public ResponseEntity<?> saveCollaborator(@RequestParam String email, @RequestBody PaimentCollaboratorDto dto) {
+    System.out.println("email = " + email + ", dto = " + dto);
+    try {
+      User user = userService.findByEmail(email);
+      if(user!=null){
 
-      String activationLink = "http://localhost:4200/activateAccount";
-      String htmlResponse = "<html><body><a href=\"" + activationLink + "\" style=\"font-size: 30px;\">Cliquer ici pour activer votre compte</a></body></html>";
-      return ResponseEntity.ok(htmlResponse);
+        PaimentCollaborator paimentCollaborator=paimentConverter.toItem(dto);
+        InscriptionCollaborator inscriptionCollaborator=paimentCollaborator.getInscriptionCollaborator();
+        inscriptionCollaborator.getCollaborator().setRoleUsers(user.getRoleUsers());
+        inscriptionCollaborator.getCollaborator().setAuthorities(user.getAuthorities());
+        inscriptionCollaborator.getCollaborator().setEmail(user.getEmail());
+        inscriptionCollaborator.getCollaborator().setFirstName(user.getFirstName());
+        inscriptionCollaborator.getCollaborator().setLastName(user.getLastName());
+        inscriptionCollaborator.getCollaborator().setPassword(user.getPassword());
+        inscriptionCollaborator.getCollaborator().setUsername(user.getUsername());
+        inscriptionCollaborator.getCollaborator().setPhone(user.getPhone());
+        inscriptionCollaborator.getCollaborator().setAccountNonExpired(user.getAccountNonExpired());
+        inscriptionCollaborator.getCollaborator().setAccountNonLocked(user.getAccountNonLocked());
+        inscriptionCollaborator.getCollaborator().setEnabled(user.getEnabled());
+        inscriptionCollaborator.getCollaborator().setExpirationLinkDate(user.getExpirationLinkDate());
+        inscriptionCollaborator.getCollaborator().setCode(user.getCode());
+        inscriptionCollaborator.getCollaborator().setModelPermissionUsers(user.getModelPermissionUsers());
+        inscriptionCollaborator.getCollaborator().setPasswordChanged(user.getPasswordChanged());
+        inscriptionCollaboratorService.create(inscriptionCollaborator);
+        paimentCollaborator.setInscriptionCollaborator(inscriptionCollaborator);
+        paimentService.create(paimentCollaborator);
 
+      }
+
+      return ResponseEntity.ok("Inscription réussie");
+    } catch (Exception e) {
+      return ResponseEntity.status(500).body("Erreur lors de l'inscription : " + e.getMessage());
     }
-    return ResponseEntity.badRequest().body("Invalid verification code");
   }
-
-
-
-*/
-
-
 
 
 

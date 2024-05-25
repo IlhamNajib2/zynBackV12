@@ -32,7 +32,7 @@ public class RoleUserConverter extends AbstractConverter<RoleUser, RoleUserDto> 
         RoleUser item = new RoleUser();
             if(StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(this.role && dto.getRole()!=null &&  dto.getRole().getId() != null)
+            if(this.role && dto.getRole()!=null)
                 item.setRole(roleConverter.toItem(dto.getRole())) ;
 
             if(dto.getUser() != null && dto.getUser().getId() != null){
