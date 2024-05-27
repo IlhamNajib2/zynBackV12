@@ -61,7 +61,7 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
+/*
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/verify").permitAll()
@@ -74,17 +74,19 @@ public class WebSecurityConfig {
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll() // Permit access to Swagger UI and API docs
                         .requestMatchers("/api/admin/login").permitAll()
                         .requestMatchers("/api/collaborator/login").permitAll()
-                        .requestMatchers("/api/collaborator/packaging/").permitAll()
                         .requestMatchers("/api/member/login").permitAll()
                         .requestMatchers("/api/influencer/login").permitAll()
                        // .requestMatchers("/api/admin/**").hasAnyAuthority(AuthoritiesConstants.ADMIN)
                         .requestMatchers("/api/admin/**").permitAll()
-                        .requestMatchers("/api/collaborator/**").hasAnyAuthority(AuthoritiesConstants.COLLABORATOR)
+                       // .requestMatchers("/api/collaborator/**").hasAnyAuthority(AuthoritiesConstants.COLLABORATOR)
+                        .requestMatchers("/api/collaborator/**").permitAll()
                         .requestMatchers("/api/member/**").hasAnyAuthority(AuthoritiesConstants.MEMBER)
                         .requestMatchers("/api/influencer/**").hasAnyAuthority(AuthoritiesConstants.INFLUENCER)
                         .anyRequest().authenticated()
 
 
+ */
+                                .anyRequest().permitAll()
                 );
 
         http.authenticationProvider(authenticationProvider());
