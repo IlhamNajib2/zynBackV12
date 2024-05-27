@@ -87,6 +87,9 @@ public class LevelTemplateConverter {
 
     public void copy(LevelTemplateDto dto, LevelTemplate t) {
 		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+
+
+
     }
 
     public List<LevelTemplate> copy(List<LevelTemplateDto> dtos) {

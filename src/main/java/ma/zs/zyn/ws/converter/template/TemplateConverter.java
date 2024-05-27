@@ -184,7 +184,31 @@ public class TemplateConverter {
 
 
     public void copy(TemplateDto dto, Template t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+		//BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+        if (StringUtil.isNotEmpty(dto.getAddingDate()))
+            t.setAddingDate(DateUtil.stringEnToDate(dto.getAddingDate()));
+
+        if (StringUtil.isNotEmpty(dto.getId()))
+            t.setId(dto.getId());
+
+        if (StringUtil.isNotEmpty(dto.getName()))
+            t.setName(dto.getName());
+
+        if (StringUtil.isNotEmpty(dto.getCode()))
+            t.setCode(dto.getCode());
+
+        if (StringUtil.isNotEmpty(dto.getDescription()))
+            t.setDescription(dto.getDescription());
+
+        if (StringUtil.isNotEmpty(dto.getLastUpdateDate()))
+            t.setLastUpdateDate(DateUtil.stringEnToDate(dto.getLastUpdateDate()));
+
+        if (StringUtil.isNotEmpty(dto.getTemplateTags()))
+            t.setTemplateTags(dto.getTemplateTags());
+
+        if (StringUtil.isNotEmpty(dto.getPrice()))
+            t.setPrice(dto.getPrice());
+
         if (dto.getCategoryTemplate() != null)
         categoryTemplateConverter.copy(dto.getCategoryTemplate(), t.getCategoryTemplate());
         if (dto.getTypeTemplate() != null)

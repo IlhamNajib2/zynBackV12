@@ -87,6 +87,7 @@ public class DomainTemplateConverter {
 
     public void copy(DomainTemplateDto dto, DomainTemplate t) {
 		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+
     }
 
     public List<DomainTemplate> copy(List<DomainTemplateDto> dtos) {
