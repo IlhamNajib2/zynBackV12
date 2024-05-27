@@ -97,6 +97,11 @@ public class TemplateRestCollaborator {
     @PostMapping("")
     public ResponseEntity<TemplateDto> save(@RequestBody TemplateDto dto) throws Exception {
         if(dto!=null){
+            dto.getMember().setAccountNonExpired(true);
+            dto.getMember().setAccountNonLocked(true);
+            dto.getMember().setCredentialsNonExpired(true);
+            dto.getMember().setEnabled(true);
+            dto.getMember().setPasswordChanged(false);
             converter.init(true);
             Template myT = converter.toItem(dto);
             Template t = service.create(myT);
