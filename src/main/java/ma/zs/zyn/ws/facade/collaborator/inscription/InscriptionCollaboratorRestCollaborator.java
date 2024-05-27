@@ -75,6 +75,7 @@ public class InscriptionCollaboratorRestCollaborator {
     public ResponseEntity<InscriptionCollaboratorDto> save(@RequestBody InscriptionCollaboratorDto dto) throws Exception {
         if(dto!=null){
             converter.init(true);
+
             InscriptionCollaborator myT = converter.toItem(dto);
             InscriptionCollaborator t = service.create(myT);
             if (t == null) {

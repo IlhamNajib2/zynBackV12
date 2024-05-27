@@ -252,7 +252,6 @@ public class AuthController {
 
       if(user!=null){
         PaimentCollaborator paimentCollaborator=paimentConverter.toItem(dto);
-
           InscriptionCollaborator inscriptionCollaborator=paimentCollaborator.getInscriptionCollaborator();
         inscriptionCollaborator.getCollaborator().setRoleUsers(user.getRoleUsers());
         inscriptionCollaborator.getCollaborator().setAuthorities(user.getAuthorities());

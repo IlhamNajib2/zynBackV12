@@ -156,7 +156,23 @@ public class ProjectConverter {
 
 
     public void copy(ProjectDto dto, Project t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+		//BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+
+        if (StringUtil.isNotEmpty(dto.getGeneratedDate()))
+            t.setGeneratedDate(DateUtil.stringEnToDate(dto.getGeneratedDate()));
+
+        if (StringUtil.isNotEmpty(dto.getId()))
+            t.setId(dto.getId());
+
+        if (StringUtil.isNotEmpty(dto.getCode()))
+            t.setCode(dto.getCode());
+
+        if (StringUtil.isNotEmpty(dto.getYaml()))
+            t.setYaml(dto.getYaml());
+
+        if (StringUtil.isNotEmpty(dto.getName()))
+            t.setName(dto.getName());
+
         if (dto.getProjectState() != null)
         projectStateConverter.copy(dto.getProjectState(), t.getProjectState());
         if (dto.getInscriptionMembre() != null)

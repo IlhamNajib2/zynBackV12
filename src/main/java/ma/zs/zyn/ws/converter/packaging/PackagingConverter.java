@@ -136,7 +136,43 @@ public class PackagingConverter {
 
 
     public void copy(PackagingDto dto, Packaging t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+		//BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+        if (StringUtil.isNotEmpty(dto.getDateStart()))
+            t.setDateStart(DateUtil.stringEnToDate(dto.getDateStart()));
+
+        if (StringUtil.isNotEmpty(dto.getDateEnd()))
+            t.setDateEnd(DateUtil.stringEnToDate(dto.getDateEnd()));
+
+
+        if (StringUtil.isNotEmpty(dto.getDescription()))
+            t.setDescription(dto.getDescription());
+
+        if (StringUtil.isNotEmpty(dto.getCode()))
+            t.setCode(dto.getCode());
+
+        if (StringUtil.isNotEmpty(dto.getId()))
+            t.setId(dto.getId());
+
+        if (StringUtil.isNotEmpty(dto.getMaxAttribut()))
+            t.setMaxAttribut(dto.getMaxAttribut());
+
+        if (StringUtil.isNotEmpty(dto.getMaxEntity()))
+            t.setMaxEntity(dto.getMaxEntity());
+
+        if (StringUtil.isNotEmpty(dto.getMaxProjet()))
+            t.setMaxProjet(dto.getMaxProjet());
+
+        if (StringUtil.isNotEmpty(dto.getMaxIndicator()))
+            t.setMaxIndicator(dto.getMaxIndicator());
+
+
+        if (StringUtil.isNotEmpty(dto.getPrice()))
+            t.setPrice(dto.getPrice());
+
+        if (StringUtil.isNotEmpty(dto.getName()))
+            t.setName(dto.getName());
+
+
         if (dto.getCategoryPackaging() != null)
         categoryPackagingConverter.copy(dto.getCategoryPackaging(), t.getCategoryPackaging());
     }

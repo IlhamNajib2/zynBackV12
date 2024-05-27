@@ -183,7 +183,29 @@ public class InscriptionCollaboratorConverter {
 
 
     public void copy(InscriptionCollaboratorDto dto, InscriptionCollaborator t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+		//BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+        if (StringUtil.isNotEmpty(dto.getStartDate()))
+            t.setStartDate(DateUtil.stringEnToDate(dto.getStartDate()));
+        if (StringUtil.isNotEmpty(dto.getEndDate()))
+            t.setEndDate(DateUtil.stringEnToDate(dto.getEndDate()));
+        if (StringUtil.isNotEmpty(dto.getRenewDate()))
+            t.setRenewDate(DateUtil.stringEnToDate(dto.getRenewDate()));
+
+        if (StringUtil.isNotEmpty(dto.getId()))
+            t.setId(dto.getId());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedAttribut()))
+            t.setConsumedAttribut(dto.getConsumedAttribut());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedProjet()))
+            t.setConsumedProjet(dto.getConsumedProjet());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedEntity()))
+            t.setConsumedEntity(dto.getConsumedEntity());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedIndicator()))
+            t.setConsumedIndicator(dto.getConsumedIndicator());
+
         if (dto.getPackaging() != null)
         packagingConverter.copy(dto.getPackaging(), t.getPackaging());
         if (dto.getCollaborator() != null)

@@ -160,7 +160,33 @@ public class InscriptionMembreConverter {
 
 
     public void copy(InscriptionMembreDto dto, InscriptionMembre t) {
-		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+		//BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+        if (StringUtil.isNotEmpty(dto.getInscriptionDate()))
+            t.setInscriptionDate(DateUtil.stringEnToDate(dto.getInscriptionDate()));
+
+        if (StringUtil.isNotEmpty(dto.getId()))
+            t.setId(dto.getId());
+
+        if (StringUtil.isNotEmpty(dto.getAffectedAttribut()))
+            t.setAffectedAttribut(dto.getAffectedAttribut());
+
+        if (StringUtil.isNotEmpty(dto.getAffectedEntity()))
+            t.setAffectedEntity(dto.getAffectedEntity());
+
+        if (StringUtil.isNotEmpty(dto.getAffectedProjet()))
+            t.setAffectedProjet(dto.getAffectedProjet());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedAttribut()))
+            t.setConsumedAttribut(dto.getConsumedAttribut());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedEntity()))
+            t.setConsumedEntity(dto.getConsumedEntity());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedProjet()))
+            t.setConsumedProjet(dto.getConsumedProjet());
+
+        if (StringUtil.isNotEmpty(dto.getConsumedIndicator()))
+            t.setConsumedIndicator(dto.getConsumedIndicator());
         if (dto.getMember() != null)
         memberConverter.copy(dto.getMember(), t.getMember());
         if (dto.getInscriptionMembreState() != null)
