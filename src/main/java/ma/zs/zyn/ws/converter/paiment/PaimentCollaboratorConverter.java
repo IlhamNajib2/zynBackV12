@@ -69,7 +69,7 @@ public class PaimentCollaboratorConverter {
                 item.setInscriptionCollaborator(inscriptionCollaboratorConverter.toItem(dto.getInscriptionCollaborator()));
             }
 
-            if(this.paimentCollaboratorState && dto.getPaimentCollaboratorState()!=null)
+            if(this.paimentCollaboratorState)
                 item.setPaimentCollaboratorState(paimentCollaboratorStateConverter.toItem(dto.getPaimentCollaboratorState())) ;
 
 

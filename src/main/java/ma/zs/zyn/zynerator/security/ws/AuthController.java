@@ -246,13 +246,14 @@ public class AuthController {
 
   @PostMapping("saveCollaborator")
   public ResponseEntity<?> saveCollaborator(@RequestParam String email, @RequestBody PaimentCollaboratorDto dto) {
-    System.out.println("email = " + email + ", dto = " + dto);
+    System.out.println("email = " + email + ", dto = " + dto.getCode());
     try {
       User user = userService.findByEmail(email);
-      if(user!=null){
 
+      if(user!=null){
         PaimentCollaborator paimentCollaborator=paimentConverter.toItem(dto);
-        InscriptionCollaborator inscriptionCollaborator=paimentCollaborator.getInscriptionCollaborator();
+
+          InscriptionCollaborator inscriptionCollaborator=paimentCollaborator.getInscriptionCollaborator();
         inscriptionCollaborator.getCollaborator().setRoleUsers(user.getRoleUsers());
         inscriptionCollaborator.getCollaborator().setAuthorities(user.getAuthorities());
         inscriptionCollaborator.getCollaborator().setEmail(user.getEmail());
