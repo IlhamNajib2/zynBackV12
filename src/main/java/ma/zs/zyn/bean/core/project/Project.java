@@ -39,7 +39,7 @@ public class Project  extends BaseEntity     {
 
     private LocalDateTime generatedDate ;
 
-    @Column(length = 500)
+
     private String yaml;
 
     private ProjectState projectState ;
@@ -90,6 +90,8 @@ public class Project  extends BaseEntity     {
     public void setGeneratedDate(LocalDateTime generatedDate){
         this.generatedDate = generatedDate;
     }
+    @Lob
+    @Column(columnDefinition="TEXT")
     public String getYaml(){
         return this.yaml;
     }

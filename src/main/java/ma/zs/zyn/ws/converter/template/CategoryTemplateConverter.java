@@ -87,6 +87,7 @@ public class CategoryTemplateConverter {
 
     public void copy(CategoryTemplateDto dto, CategoryTemplate t) {
 		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+
     }
 
     public List<CategoryTemplate> copy(List<CategoryTemplateDto> dtos) {

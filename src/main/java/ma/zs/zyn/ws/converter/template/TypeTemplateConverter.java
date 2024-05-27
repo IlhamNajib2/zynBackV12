@@ -87,6 +87,8 @@ public class TypeTemplateConverter {
 
     public void copy(TypeTemplateDto dto, TypeTemplate t) {
 		BeanUtils.copyProperties(dto, t, AbstractConverterHelper.getNullPropertyNames(dto));
+
+
     }
 
     public List<TypeTemplate> copy(List<TypeTemplateDto> dtos) {
