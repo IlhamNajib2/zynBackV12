@@ -86,6 +86,11 @@ public class WebSecurityConfig {
 
 
  */
+                                .requestMatchers("/login").permitAll()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/verify").permitAll()
+                                .requestMatchers("/forgetPassword").permitAll()
+                                .requestMatchers("/changePassword").permitAll()
                                 .anyRequest().permitAll()
                 );
 

@@ -15,7 +15,7 @@ public class EmailService {
 
     public void sendSimpleMessage(EmailRequest emailRequest){
         String username = "najibilham841@gmail.com";
-        String password = "nqlg qwxx xixj rgzm";
+        String password = "aqmv vzhx dwtl crvn";
         Email email =EmailBuilder.startingBlank()
                 .from(username)
                 .to(emailRequest.getTo())
